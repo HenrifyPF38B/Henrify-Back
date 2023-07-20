@@ -1,21 +1,24 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const ShoppingCarts = sequelize.define('ShoppingCarts', {
+const Genres = sequelize.define('Genres', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    state:{
+    name:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    deleted:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
     },
-    rating:{
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    }
+  },
+  {
+    timestamps: false
   })
 
-  export default ShoppingCarts;
+  export default Genres;
