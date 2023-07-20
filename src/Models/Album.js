@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Album = sequelize.define('Album', {
+const Albums = sequelize.define('Albums', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -48,4 +48,4 @@ const Album = sequelize.define('Album', {
 
   
 
-  export default Album;
+  export default Albums;

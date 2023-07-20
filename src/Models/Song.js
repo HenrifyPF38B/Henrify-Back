@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Song = sequelize.define('Song', {
+const Songs = sequelize.define('Songs', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -33,4 +33,4 @@ const Song = sequelize.define('Song', {
     }
   })
 
-  export default Song;
+  export default Songs;

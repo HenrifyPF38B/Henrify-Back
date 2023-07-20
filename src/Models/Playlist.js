@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Playlist = sequelize.define('Playlist', {
+const Playlists = sequelize.define('Playlists', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -10,8 +10,8 @@ const Playlist = sequelize.define('Playlist', {
     name:{
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: `Playlist`
+      defaultValue: `Playlists`
     }
   })
 
-  export default Playlist;
+  export default Playlists;

@@ -14,8 +14,11 @@ import {
 
 const app = express()
 
-sequelize.sync({force: true}).then(() => {
-  app.listen(3001, () => {
-    console.log("server on port 3001")
+sequelize.sync({force: true})
+  .then(() => {
+    app.listen(3001, () => {
+      console.log("server on port 3001")
   })
-})
+  .catch((error) => {
+    console.log(error)
+  })
