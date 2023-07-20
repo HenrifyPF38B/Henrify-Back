@@ -4,12 +4,10 @@ const getAlbums = getAlbum.getAlbums;
 
 
 const postAlbumController = async (req, res, next) => {
-    const {name, artists, durationTotal, launchDate, totalSongs, image, price, } = req.body
-
-    // console.log('form',name, artists, durationTotal, launchDate, totalSongs, image, price )
+    const {name, artists, durationTotal, launchDate, totalSongs, image, price, genero} = req.body
 
     try {
-        const create = await postAlbum(name, artists, durationTotal, launchDate, totalSongs, image, price)
+        const create = await postAlbum(name, artists, durationTotal, launchDate, totalSongs, image, price, genero)
 
         res.status(200).json(create)
     } catch (error) {

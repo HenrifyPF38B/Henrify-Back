@@ -1,7 +1,7 @@
 import Album  from '../Models/Album.js'
 
-const postAlbum = async (name, artists, durationTotal, launchDate, totalSongs, image, price) => {
-    const newAlbum = await Album.create({name, artists, durationTotal, launchDate, totalSongs, image, price })
+const postAlbum = async (name, artists, durationTotal, launchDate, totalSongs, image, price, genero) => {
+    const newAlbum = await Album.create({name, artists, durationTotal, launchDate, totalSongs, image, price, genero })
 
     return { data: newAlbum }
 }
