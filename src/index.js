@@ -22,4 +22,3 @@ sequelize.sync({force: true})
   .catch((error) => {
     console.log(error)
   })
-})

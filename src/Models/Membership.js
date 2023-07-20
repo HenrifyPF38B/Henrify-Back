@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Membership = sequelize.define('Membership', {
+const Memberships = sequelize.define('Memberships', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -29,4 +29,4 @@ const Membership = sequelize.define('Membership', {
     }
   })
 
-  export default Membership;
+  export default Memberships;
