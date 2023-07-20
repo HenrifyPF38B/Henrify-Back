@@ -17,11 +17,11 @@ const Song = sequelize.define('Song', {
     },
     duration:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     launchDate:{
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: true
     },
     audio:{
       type: DataTypes.STRING,

@@ -35,9 +35,9 @@ const Album = sequelize.define('Album', {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    genero:{
+    stock:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     deleted:{
       type: DataTypes.BOOLEAN,
