@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Membership = sequelize.define('Membership', {
+const Memberships = sequelize.define('Memberships', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -26,7 +26,15 @@ const Membership = sequelize.define('Membership', {
     avatar:{
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    deleted:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  },
+  {
+    timestamps: false
   })
 
-  export default Membership;
+  export default Memberships;

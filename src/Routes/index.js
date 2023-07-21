@@ -1,18 +1,18 @@
-import { Router } from "express"
-import responseController from "../Controllers/responseController.js";
-const postSongController = responseController.postSongController;
-const getAlbumsController = responseController.getAlbumsController;
-const getGenresController = responseController.getGenresController
-const getSongsController  = responseController.getSongsController
+import { Router } from "express";
+import { usersRouter } from './users.routes.js'
+import { songsRouter } from './songs.routes.js'
+import { reviewsRouter } from './reviews.routes.js'
+import { playlistsRouter } from './playlists.routes.js'
+import { albumsRouter } from './albums.routes.js'
+import { membershipsRouter } from './memberships.routes.js'
+import { genresRouter } from './genres.routes.js'
 
-const router = Router();
+export const router = Router()
 
-router.get('/albums', getAlbumsController)
-
-router.get('/genres', getGenresController)
-
-router.get('/songs', getSongsController)
-
-router.post('/new/song', postSongController)
-
-export default  router;
+router.use('/users', usersRouter)
+router.use('/songs', songsRouter)
+router.use('/reviews', reviewsRouter)
+router.use('/playlists', playlistsRouter)
+router.use('/albums', albumsRouter)
+router.use('/memberships', membershipsRouter)
+router.use('/genres', genresRouter)
