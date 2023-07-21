@@ -30,7 +30,15 @@ const Songs = sequelize.define('Songs', {
     image:{
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    deleted:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  },
+  {
+    timestamps: false
   })
 
   export default Songs;

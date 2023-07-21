@@ -1,60 +1,60 @@
-import User  from './User.js'
-import ShoppingCart  from './ShoppingCart.js'
+import Users  from './Users.js'
+import ShoppingCarts  from './ShoppingCarts.js'
 import Reviews  from './Reviews.js'
-import Membership  from './Membership.js'
-import Playlist  from './Playlist.js'
-import Album  from './Album.js'
-import Song  from './Song.js'
-import Genre  from './Genre.js'
+import Memberships  from './Memberships.js'
+import Playlists  from './Playlists.js'
+import Albums  from './Albums.js'
+import Songs  from './Songs.js'
+import Genres  from './Genres.js'
 import Products  from './Products.js'
 
 //RELACIONES DE USUARIO
-User.hasMany(Reviews)
-User.hasOne(Membership)
-User.belongsTo(ShoppingCart)
-User.hasMany(Playlist)
+Users.hasMany(Reviews)
+Users.hasOne(Memberships)
+Users.belongsTo(ShoppingCarts)
+Users.hasMany(Playlists)
 
-//RELACIONES DE SHOPPINGCART
-ShoppingCart.belongsTo(User)
-ShoppingCart.belongsToMany(Album, { through: Products } )
-ShoppingCart.belongsToMany(Membership, { through: Products } )
+//RELACIONES DE SHOPPINGCARTs
+ShoppingCarts.belongsTo(Users)
+ShoppingCarts.belongsToMany(Albums, { through: Products } )
+ShoppingCarts.belongsToMany(Memberships, { through: Products } )
 
 //RELACIONES DE REVIEWS
-Reviews.belongsTo(User)
-Reviews.belongsTo(Album)
+Reviews.belongsTo(Users)
+Reviews.belongsTo(Albums)
 
-//RELACIONES DE MEMBERSHIPS
-Membership.hasMany(User)
-Membership.belongsToMany(Album, { through: Playlist })
-Membership.belongsToMany(Song, { through: Playlist })
+//RELACIONES DE MEMBERSHIPsS
+Memberships.hasMany(Users)
+Memberships.belongsToMany(Albums, { through: Playlists })
+Memberships.belongsToMany(Songs, { through: Playlists })
 
 //RELACIONES DE PLAYLIST
-Playlist.belongsTo(User)
+Playlists.belongsTo(Users)
 
 //RELACIONES DE ALBUM
-Album.hasMany(Reviews)
-Album.belongsToMany(ShoppingCart, { through: Products })
-Album.belongsToMany(Membership, { through: Playlist })
-Album.belongsTo(Song)
-Album.belongsToMany(Genre, { through: 'GenreRelation' })
+Albums.hasMany(Reviews)
+Albums.belongsToMany(ShoppingCarts, { through: Products })
+Albums.belongsToMany(Memberships, { through: Playlists })
+Albums.belongsTo(Songs)
+Albums.belongsToMany(Genres, { through: 'GenreRelation' })
 
 //RELACIONES DE SONG  
-Song.belongsToMany(Genre, { through: 'GenreRelation' })
-Song.belongsToMany(Membership, { through: Playlist }) 
-Song.belongsTo(Album)
+Songs.belongsToMany(Genres, { through: 'GenreRelation' })
+Songs.belongsToMany(Memberships, { through: Playlists }) 
+Songs.belongsTo(Albums)
 
 //RELACIONES DE GENRES
-Genre.belongsToMany(Album, { through: 'GenreRelation' })
-Genre.belongsToMany(Song, { through: 'GenreRelation' })
+Genres.belongsToMany(Albums, { through: 'GenreRelation' })
+Genres.belongsToMany(Songs, { through: 'GenreRelation' })
 
 export {
-  Album,
-  Genre,
-  Membership,
-  Playlist,
+  Albums,
+  Genres,
+  Memberships,
+  Playlists,
   Reviews,
-  ShoppingCart,
-  Song,
-  User,
+  ShoppingCarts,
+  Songs,
+  Users,
   Products
 }

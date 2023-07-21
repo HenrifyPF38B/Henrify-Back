@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Albums = sequelize.define('Albums', {
+const Memberships = sequelize.define('Memberships', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -11,41 +11,30 @@ const Albums = sequelize.define('Albums', {
       type: DataTypes.STRING,
       allowNull: false
     },
-    artists:{
+    description:{
       type: DataTypes.STRING,
       allowNull: false
     },
-    durationTotal:{
+    duration:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    launchDate:{
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    totalSongs:{
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    image:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     price:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-    stock:{
-      type: DataTypes.INTEGER,
+    avatar:{
+      type: DataTypes.STRING,
       allowNull: false
     },
     deleted:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    }, 
+    },
+  },
+  {
+    timestamps: false
   })
 
-  
-
-  export default Albums;
+  export default Memberships;
