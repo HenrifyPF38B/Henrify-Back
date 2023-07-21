@@ -15,6 +15,9 @@ import {
 
 const app = express()
 
+//midelwares
+app.use(express.json());
+
 //rutas
 app.use('/api', router)
 
@@ -27,3 +30,10 @@ sequelize.sync({force: true})
   .catch((error) => {
     console.log(error)
   })
+
+  app.use((err, req, res, next) => {
+    const status = err.status || 500;
+    const message = err.message || err;
+    console.error(err);
+    res.status(status).send(message);
+  });
