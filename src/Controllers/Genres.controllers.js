@@ -1,13 +1,35 @@
-import Genre from '../Models/Genre.js'
+import Genres from '../Models/Genres.js'
 
-export const postGenre = async (name) => {
-    const newGenre = await Genre.create({name})
+export const getAllGenres = async () => {
+  const genres = await Genres.findAll()
 
-    return { data: newGenre }
+  return { data: genres }
 }
 
-export const getGenre = async () => {
-    const genres = await Genre.findAll()
+export const getGenreById = async (id) => {
+  const genres = await Genres.findByPk(id)
 
-    return { data: genres }
+  if (!genres) {
+    return { message: `No se encontraron géneros con el ID ${id}` }
+  }
+
+  return genres
+}
+export const deleteGenreById = async (id) => {
+  const genre = await Genres.findByPk(id)
+
+  if (!genre) {
+    return null
+  }
+
+  await genre.destroy()
+  return genre
+}
+export const createGenre = async (id, name) => {
+  const newGenre = await Genres.create({
+    id,
+    name,
+  })
+
+  return newGenre
 }

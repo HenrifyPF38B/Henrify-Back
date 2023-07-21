@@ -6,13 +6,13 @@ import {
   createAlbum,
   modifyAlbum,
 } from '../../Controllers/Albums.controllers.js'
-
-//Obtener todos los albumnes
+import Genres from '../../Models/Genres.js'
 
 const getAlbumsHandler = async (req, res, next) => {
   const { name } = req.query
 
   const results = name ? await searchAlbums(name) : await getAllAlbums()
+
   try {
     res.status(200).json(results)
   } catch (error) {
@@ -116,6 +116,7 @@ const putAlbumsHandler = async (req, res, next) => {
     )
 
     res.status(200).json(updatedAlbum)
+    res.message('Álbum editado con éxito')
   } catch (error) {
     next(error)
   }

@@ -2,7 +2,9 @@ import Albums from '../Models/Albums.js'
 import { Sequelize } from 'sequelize'
 
 export const getAllAlbums = async () => {
-  const albums = await Albums.findAll()
+  const albums = await Albums.findAll({
+    where: { deleted: false },
+  })
 
   return { data: albums }
 }
@@ -41,7 +43,9 @@ export const deleteAlbumById = async (id) => {
     return null
   }
 
-  await album.destroy()
+  album.deleted = true
+  await album.save()
+
   return album
 }
 
