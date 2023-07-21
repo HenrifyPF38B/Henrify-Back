@@ -1,12 +1,12 @@
-import Users  from './Users.js'
-import ShoppingCarts  from './ShoppingCarts.js'
-import Reviews  from './Reviews.js'
-import Memberships  from './Memberships.js'
-import Playlists  from './Playlists.js'
-import Albums  from './Albums.js'
-import Songs  from './Songs.js'
-import Genres  from './Genres.js'
-import Products  from './Products.js'
+import Users from './Users.js'
+import ShoppingCarts from './ShoppingCarts.js'
+import Reviews from './Reviews.js'
+import Memberships from './Memberships.js'
+import Playlists from './Playlists.js'
+import Albums from './Albums.js'
+import Songs from './Songs.js'
+import Genres from './Genres.js'
+import Products from './Products.js'
 
 //RELACIONES DE USUARIO
 Users.hasMany(Reviews)
@@ -16,8 +16,8 @@ Users.hasMany(Playlists)
 
 //RELACIONES DE SHOPPINGCARTs
 ShoppingCarts.belongsTo(Users)
-ShoppingCarts.belongsToMany(Albums, { through: Products } )
-ShoppingCarts.belongsToMany(Memberships, { through: Products } )
+ShoppingCarts.belongsToMany(Albums, { through: Products })
+ShoppingCarts.belongsToMany(Memberships, { through: Products })
 
 //RELACIONES DE REVIEWS
 Reviews.belongsTo(Users)
@@ -38,9 +38,9 @@ Albums.belongsToMany(Memberships, { through: Playlists })
 Albums.belongsTo(Songs)
 Albums.belongsToMany(Genres, { through: 'GenreRelation' })
 
-//RELACIONES DE SONG  
+//RELACIONES DE SONG
 Songs.belongsToMany(Genres, { through: 'GenreRelation' })
-Songs.belongsToMany(Memberships, { through: Playlists }) 
+Songs.belongsToMany(Memberships, { through: Playlists })
 Songs.belongsTo(Albums)
 
 //RELACIONES DE GENRES
@@ -56,5 +56,5 @@ export {
   ShoppingCarts,
   Songs,
   Users,
-  Products
+  Products,
 }
