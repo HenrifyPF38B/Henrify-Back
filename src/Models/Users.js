@@ -32,7 +32,15 @@ const Users = sequelize.define('Users', {
     },
     avatar:{
       type: DataTypes.STRING,
-    }
+    },
+    deleted:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  },
+  {
+    timestamps: false
   })
 
   export default Users;

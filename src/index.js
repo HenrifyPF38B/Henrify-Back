@@ -1,23 +1,28 @@
 import express from "express";
 import { sequelize } from "./db.js";
+import { router } from "./Routes/index.js";
 import {
-  Album,
-  Genre,
-  Membership,
-  Playlist,
+  Albums,
+  Genres,
+  Memberships,
+  Playlists,
   Reviews,
-  ShoppingCart,
-  Song,
-  User,
+  ShoppingCarts,
+  Songs,
+  Users,
   Products
 } from './Models/relations.js'
 
 const app = express()
 
+//rutas
+app.use('/api', router)
+
 sequelize.sync({force: true})
   .then(() => {
     app.listen(3001, () => {
       console.log("server on port 3001")
+    })
   })
   .catch((error) => {
     console.log(error)
