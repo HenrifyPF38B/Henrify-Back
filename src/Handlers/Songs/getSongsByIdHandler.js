@@ -1,7 +1,13 @@
 
 
 const getSongsByIdHandler = async (req, res) => {
-  return res.send('getSongsByIdHandler')
+  try {
+    const songs = await getSong();
+    return res.status(200).json(songs);
+  } 
+  catch (error) {
+    next(error)
+  }
 }
 
 export default getSongsByIdHandler
