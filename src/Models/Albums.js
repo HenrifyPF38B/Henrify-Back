@@ -15,10 +15,6 @@ const Albums = sequelize.define('Albums', {
       type: DataTypes.STRING,
       allowNull: false
     },
-    durationTotal:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     launchDate:{
       type: DataTypes.DATEONLY,
       allowNull: false

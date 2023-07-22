@@ -35,17 +35,10 @@ Playlists.belongsTo(Users)
 Albums.hasMany(Reviews)
 Albums.belongsToMany(ShoppingCarts, { through: Products })
 Albums.belongsToMany(Memberships, { through: Playlists })
-Albums.belongsTo(Songs)
-Albums.belongsToMany(Genres, { through: 'GenreRelation' })
 
 //RELACIONES DE SONG  
-Songs.belongsToMany(Genres, { through: 'GenreRelation' })
 Songs.belongsToMany(Memberships, { through: Playlists }) 
 Songs.belongsTo(Albums)
-
-//RELACIONES DE GENRES
-Genres.belongsToMany(Albums, { through: 'GenreRelation' })
-Genres.belongsToMany(Songs, { through: 'GenreRelation' })
 
 export {
   Albums,
