@@ -1,6 +1,7 @@
 import Albums from '../Models/Albums.js'
 import { Sequelize } from 'sequelize'
 
+
 export const getAllAlbums = async () => {
   const albums = await Albums.findAll({
     where: { deleted: false },
@@ -58,7 +59,6 @@ export const createAlbum = async (
   image,
   price,
   stock,
-  deleted
 ) =>
   await Albums.create({
     name,
@@ -69,7 +69,6 @@ export const createAlbum = async (
     image,
     price,
     stock,
-    deleted,
   })
 
 export const modifyAlbum = async (
@@ -82,7 +81,6 @@ export const modifyAlbum = async (
   image,
   price,
   stock,
-  deleted
 ) => {
   const album = await Albums.findByPk(id)
 
@@ -98,7 +96,6 @@ export const modifyAlbum = async (
   if (image) album.image = image
   if (price) album.price = price
   if (stock) album.stock = stock
-  if (deleted) album.deleted = deleted
 
   await album.save()
 

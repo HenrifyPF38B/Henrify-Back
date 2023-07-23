@@ -49,17 +49,8 @@ const deleteAlbumsHandler = async (req, res, next) => {
 }
 
 const postAlbumsHandler = async (req, res, next) => {
-  const {
-    name,
-    artists,
-    genres,
-    launchDate,
-    totalSongs,
-    image,
-    price,
-    stock,
-    deleted,
-  } = req.body
+  const { name, artists, genres, launchDate, totalSongs, image, price, stock } =
+    req.body
   const newAlbum = await createAlbum(
     name,
     artists,
@@ -68,8 +59,7 @@ const postAlbumsHandler = async (req, res, next) => {
     totalSongs,
     image,
     price,
-    stock,
-    deleted
+    stock
   )
   try {
     res.status(201).json(newAlbum)
@@ -91,11 +81,10 @@ const putAlbumsHandler = async (req, res, next) => {
       image,
       price,
       stock,
-      deleted,
     } = req.body
 
     const updatedAlbum = await modifyAlbum(
-      id, 
+      id,
       name,
       artists,
       genres,
@@ -103,8 +92,7 @@ const putAlbumsHandler = async (req, res, next) => {
       totalSongs,
       image,
       price,
-      stock,
-      deleted
+      stock
     )
 
     res.status(200).json(updatedAlbum)
@@ -112,6 +100,8 @@ const putAlbumsHandler = async (req, res, next) => {
     next(error)
   }
 }
+
+
 
 export {
   getAlbumsByIdHandler,
