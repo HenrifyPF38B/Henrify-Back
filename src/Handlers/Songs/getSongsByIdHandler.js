@@ -1,13 +1,13 @@
+import { getSongById } from "../../Controllers/Songs.controllers.js";
 
-
-const getSongsByIdHandler = async (req, res) => {
+const getSongByIdHandler = async (req, res, next) => {
   try {
-    const songs = await getSong();
-    return res.status(200).json(songs);
-  } 
-  catch (error) {
-    next(error)
+    const { id } = req.params;
+    const song = await getSongById(+id);
+    return res.status(200).json(song);
+  } catch (error) {
+    next(error);
   }
-}
+};
 
-export default getSongsByIdHandler
+export default getSongByIdHandler;
