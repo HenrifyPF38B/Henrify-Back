@@ -19,7 +19,17 @@ const Products = sequelize.define('Products', {
     price:{
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    deleted:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  },{
+    timestamps: false
+  },
+  {
+    timestamps: false
   })
 
   export default Products;

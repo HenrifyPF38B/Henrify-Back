@@ -1,51 +1,58 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Album = sequelize.define('Album', {
-    id:{
+const Albums = sequelize.define(
+  "Albums",
+  {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
-    name:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    artists:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    durationTotal:{
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    launchDate:{
+    artists: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    totalSongs:{
+
+    launchDate: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    genres: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    totalSongs: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
-    image:{
+    image: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    price:{
+    price: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
     },
-    stock:{
+    stock: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: true,
     },
-    deleted:{
+    deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
-    }, 
-  })
+      defaultValue: false,
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
 
   
 
-  export default Album;
+  export default Albums;
