@@ -1,13 +1,49 @@
-import Song from '../Models/Song.js'
+import Songs from './../Models/Songs.js'
 
-export const postSong = async (name, artists, audio, image) => {
-    const newSong = await Song.create({name, artists, audio, image})
+export const getAllSongs = async () => {
+  const songs = await Songs.findAll()
 
-    return { data: newSong }
+  return { data: songs }
 }
 
-export const getSong = async () => {
-    const songs = await Song.findAll()
+export const getSongById = async (id) => {
+  const song = await Songs.findByPk(id)
 
-    return { data: songs }
+  if (!song) {
+    return { message: `No se encontraron canciones con el ID ${id}` }
+  }
+
+  return song
+}
+
+export const deleteSongById = async (id) => {
+  const song = await Songs.findByPk(id)
+
+  if (!song) {
+    return null
+  }
+
+  await song.destroy()
+  return song
+}
+export const createSong = async (
+  id,
+  name,
+  artists,
+  audio,
+  image,
+  duration,
+  launchDate
+) => {
+  const newSong = await Songs.create({
+    id,
+    name,
+    artists,
+    audio,
+    image,
+    duration,
+    launchDate,
+  })
+
+  return newSong
 }

@@ -1,9 +1,6 @@
 import { Router } from "express";
-import getSongsHandler from "../Handlers/Songs/getSongsHandler.js";
-import getSongsByIdHandler from "../Handlers/Songs/getSongsByIdHandler.js";
-import postSongsHandler from "../Handlers/Songs/postSongsHandler.js";
-import putSongsHandler from "../Handlers/Songs/putSongsHandler.js";
-import deleteSongsHandler from "../Handlers/Songs/deleteSongsHandler.js";
+import { deleteSongsHandler, getSongsByIdHandler, getSongsHandler, postSongsHandler, putSongsHandler } from "../Handlers/Songs/songsHandler.js";
+
 
 export const songsRouter = Router()
 
