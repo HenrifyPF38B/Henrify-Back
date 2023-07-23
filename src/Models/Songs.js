@@ -9,15 +9,15 @@ const Songs = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    name:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
-    artists: {
+    artists:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
-    launchDate: {
+    launchDate:{
       type: DataTypes.DATEONLY,
       allowNull: true,
     },
@@ -25,7 +25,11 @@ const Songs = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    audio: {
+    launchDate:{
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    audio:{
       type: DataTypes.STRING,
       allowNull: false,
     },
