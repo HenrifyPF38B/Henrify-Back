@@ -6,14 +6,12 @@ import {
   createAlbum,
   modifyAlbum,
 } from '../../Controllers/Albums.controllers.js'
-import Genres from '../../Models/Genres.js'
 
 const getAlbumsHandler = async (req, res, next) => {
   const { name } = req.query
 
-  const results = name ? await searchAlbums(name) : await getAllAlbums()
-
   try {
+    const results = name ? await searchAlbums(name) : await getAllAlbums()
     res.status(200).json(results)
   } catch (error) {
     next(error)
