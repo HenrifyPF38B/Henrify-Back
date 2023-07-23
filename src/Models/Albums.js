@@ -27,6 +27,10 @@ const Albums = sequelize.define('Albums', {
       type: DataTypes.STRING,
       allowNull: false
     },
+    genre:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     price:{
       type: DataTypes.INTEGER,
       allowNull: false
