@@ -12,11 +12,15 @@ import {
   Users,
   Products,
 } from './Models/relations.js'
+import cors from 'cors';
+
 
 const app = express()
 
-//midelwares
+//middlewares
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 
 //rutas
 app.use('/api', router)
