@@ -1,8 +1,9 @@
 import Genres from '../Models/Genres.js'
 
 export const getAllGenres = async () => {
-  const genres = await Genres.findAll()
-
+    const genres = await Genres.findAll({
+        where: { deleted: false },
+      })
   return { data: genres }
 }
 
@@ -16,14 +17,16 @@ export const getGenreById = async (id) => {
   return genres
 }
 export const deleteGenreById = async (id) => {
-  const genre = await Genres.findByPk(id)
+    const genres = await Genres.findByPk(id)
 
-  if (!genre) {
-    return null
-  }
-
-  await genre.destroy()
-  return genre
+    if (!genres) {
+      return null
+    }
+  
+    genres.deleted = true
+    await genres.save()
+  
+    return genres
 }
 export const createGenre = async (id, name) => {
   const newGenre = await Genres.create({
