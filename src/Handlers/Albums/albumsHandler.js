@@ -50,30 +50,26 @@ const deleteAlbumsHandler = async (req, res, next) => {
 
 const postAlbumsHandler = async (req, res, next) => {
   const {
-    id,
     name,
     artists,
-    durationTotal,
+    genres,
     launchDate,
     totalSongs,
     image,
     price,
     stock,
     deleted,
-    SongId,
   } = req.body
   const newAlbum = await createAlbum(
-    id,
     name,
     artists,
-    durationTotal,
+    genres,
     launchDate,
     totalSongs,
     image,
     price,
     stock,
-    deleted,
-    SongId
+    deleted
   )
   try {
     res.status(201).json(newAlbum)
@@ -89,32 +85,29 @@ const putAlbumsHandler = async (req, res, next) => {
     const {
       name,
       artists,
-      durationTotal,
+      genres,
       launchDate,
       totalSongs,
       image,
       price,
       stock,
       deleted,
-      SongId,
     } = req.body
 
     const updatedAlbum = await modifyAlbum(
-      id,
+      id, 
       name,
       artists,
-      durationTotal,
+      genres,
       launchDate,
       totalSongs,
       image,
       price,
       stock,
-      deleted,
-      SongId
+      deleted
     )
 
     res.status(200).json(updatedAlbum)
-    res.message('Álbum editado con éxito')
   } catch (error) {
     next(error)
   }

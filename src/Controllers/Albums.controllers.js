@@ -50,44 +50,39 @@ export const deleteAlbumById = async (id) => {
 }
 
 export const createAlbum = async (
-  id,
   name,
   artists,
-  durationTotal,
+  genres,
   launchDate,
   totalSongs,
   image,
   price,
   stock,
-  deleted,
-  SongId
+  deleted
 ) =>
   await Albums.create({
-    id,
     name,
     artists,
-    durationTotal,
+    genres,
     launchDate,
     totalSongs,
     image,
     price,
     stock,
     deleted,
-    SongId,
   })
 
 export const modifyAlbum = async (
   id,
   name,
   artists,
-  durationTotal,
+  genres,
   launchDate,
   totalSongs,
   image,
   price,
   stock,
-  deleted,
-  SongId
+  deleted
 ) => {
   const album = await Albums.findByPk(id)
 
@@ -97,14 +92,13 @@ export const modifyAlbum = async (
 
   if (name) album.name = name
   if (artists) album.artists = artists
-  if (durationTotal) album.durationTotal = durationTotal
+  if (genres) album.genres = genres
   if (launchDate) album.launchDate = launchDate
   if (totalSongs) album.totalSongs = totalSongs
   if (image) album.image = image
   if (price) album.price = price
   if (stock) album.stock = stock
   if (deleted) album.deleted = deleted
-  if (SongId) album.SongId = SongId
 
   await album.save()
 
