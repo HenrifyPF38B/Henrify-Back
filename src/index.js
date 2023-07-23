@@ -19,7 +19,7 @@ const app = express()
 app.use(express.json())
 
 //rutas
-app.use(router)
+app.use('/api', router)
 
 sequelize
   .sync({ force: true })
