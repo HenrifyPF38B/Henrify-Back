@@ -7,7 +7,11 @@ const Users = sequelize.define('Users', {
       primaryKey: true,
       defaultValue: UUIDV4
     },
-    name:{
+    firstName:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lastName:{
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -23,8 +27,9 @@ const Users = sequelize.define('Users', {
     },
     password:{
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
+      allowNull: false
+      // unique: true
+      // Lo comento porque si no cada usuario tendria que tener contraseña distinta
     },
     admin:{
       type: DataTypes.BOOLEAN,
