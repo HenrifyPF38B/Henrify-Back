@@ -49,7 +49,6 @@ const postSongsAllHandler = async (req, res, next) => {
       });
     }
 
-    //return res.status(200).json(albumsDatos);
     return res
       .status(200)
       .send("Se cargaron los datos en Albums, Genres y Songs");
@@ -58,33 +57,5 @@ const postSongsAllHandler = async (req, res, next) => {
   }
 };
 
-const postSongArr = async (req, res, next) => {
-  try {
-    const songsAllCheck = await Songs.findAll();
-    if (songsAllCheck.length) {
-      return res.status(200).json(songsAllCheck);
-    }
-    let name = "";
-    let artists = "";
-    let duration = "";
-    let launchDate = "";
-    let audio = "";
-    let image = "";
-
-    for (let elem of songArray) {
-      name = elem.name;
-      artists = elem.artists;
-      duration = elem.duration;
-      launchDate = elem.launchDate;
-      audio = elem.audio;
-      image = elem.image;
-
-      await Songs.create({ name, artists, duration, launchDate, audio, image });
-    }
-    const songsAll = await Songs.findAll();
-    return res.status(200).json(songsAll);
-  } catch (error) {
-    next(error);
-  }
-};
 export default postSongsAllHandler;
+
