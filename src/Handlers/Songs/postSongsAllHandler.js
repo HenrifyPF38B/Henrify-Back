@@ -48,7 +48,7 @@ const postSongsAllHandler = async (req, res, next) => {
         },
       });
     }
-   
+
     return res
       .status(200)
       .send("Se cargaron los datos en Albums, Genres y Songs");
@@ -57,5 +57,5 @@ const postSongsAllHandler = async (req, res, next) => {
   }
 };
 
-
 export default postSongsAllHandler;
+

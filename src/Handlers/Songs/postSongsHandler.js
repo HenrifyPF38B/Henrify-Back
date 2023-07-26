@@ -10,32 +10,33 @@ const postSongsHandler = async (req, res, next) => {
 
     //VALIDA la fecha llamando a una función
     const checkDate = validDate(launchDate);
-    if (!checkDate) return res.status(400).send("invalid DATE");
+    if (!checkDate) return res.status(400).json({ error: "invalid DATE" });
 
     //VALIDA el formato de URL del Audio
     const checkUrlAudio = validUrl(audio);
     if (checkUrlAudio === false)
-      return res.status(400).send("invalid URL del Audio");
+      return res.status(400).send({ error: "invalid URL del Audio" });
 
     //VALIDA el formato de URL de la image
     const checkUrlImage = validUrl(image);
     if (checkUrlImage === false)
-      return res.status(400).send("invalid URL de la Imagen");
+      return res.status(400).send({ error: "invalid URL de la Imagen" });
 
     //VALIDA LOS DATOS llamando a una función
     const checkDatos = validDatos(name, artists, genres, AlbumId);
-    if (checkDatos !== "") return res.status(400).send(checkDatos);
+    if (checkDatos !== "") return res.status(400).send({ error: checkDatos });
 
-    const create = await postSong(
+    const createSong = await postSong(
       name,
       artists,
       launchDate,
       genres,
       audio,
       image,
-      AlbumId
+      parseInt(AlbumId)
     );
-    return res.status(200).json(create);
+    if (!createSong.data) return res.status(400).json({ error: createSong });
+    return res.status(200).json(createSong);
   } catch (error) {
     next(error);
   }
@@ -50,7 +51,11 @@ const validDatos = (name, artists, genres, AlbumId) => {
     return (rpta = "Invalid artists Data");
   if (genres === null || genres === undefined || genres === "")
     return (rpta = "Invalid genres Data");
-  if (typeof AlbumId !== "number") return (rpta = "Invalid AlbumId");
+  //Verifica si un número el AlbumId
+  if (AlbumId !== 0 || AlbumId) {
+    const verifId = parseInt(AlbumId);
+    if (isNaN(verifId)) return (rpta = "Invalid AlbumId");
+  }
   return rpta;
 };
 export default postSongsHandler;
