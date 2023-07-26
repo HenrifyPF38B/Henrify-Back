@@ -10,9 +10,9 @@ import { createUserHandler } from "../Handlers/Users/createUserHandler.js";
 export const usersRouter = Router()
 
 usersRouter.get('/login', loginUserHandler)
-usersRouter.get('/register', createUserHandler)
-usersRouter.get('/', getUsersHandler)
+usersRouter.post('/register', createUserHandler)
+/* usersRouter.get('/', getUsersHandler)
 usersRouter.get('/:id',getUsersByIdHandler)
 usersRouter.post('/', postUsersHandler)
 usersRouter.put('/:id', putUsersHandler)
-usersRouter.delete('/:id', deleteUsersHandler)
+usersRouter.delete('/:id', deleteUsersHandler) */

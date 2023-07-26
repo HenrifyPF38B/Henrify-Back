@@ -1,10 +1,10 @@
-import Users  from '../Models/Users'
-const Op = Sequelize.Op;
+import Users  from '../Models/Users.js'
+import { Op } from "sequelize";
 
 
 export const userLogin = async(user) =>{
   const { credential, password } = user;
-
+ 
   const findUser = await Users.findOne({
     [Op.or]:[
       {
@@ -19,7 +19,7 @@ export const userLogin = async(user) =>{
       }
     ]
   });
-
+ // return findUser
   // Si encuentra un usuario:
   if(findUser.email){
     if(findUser.password === password){
@@ -41,12 +41,12 @@ export const userCreate = async(newUser) =>{
 
   const { email, userName } = newUser;
 
-    const validateEmail = await Users.findAndCount({email});
+    const validateEmail = await Users.findAndCountAll({email});
     if(validateEmail > 0){
       return({data: "Email Error"});
     };
 
-    const validateUsername = await Users.findAndCount({userName});
+    const validateUsername = await Users.findAndCountAll({userName});
     if(validateUsername > 0){
       return({data: "UserName Error"});
     };
