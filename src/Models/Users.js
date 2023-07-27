@@ -1,7 +1,7 @@
 import { DataTypes, UUIDV4 } from "sequelize";
 import { sequelize } from "../db.js";
 
-const User = sequelize.define('User', {
+const Users = sequelize.define('Users', {
     id:{
       type: DataTypes.UUID,
       primaryKey: true,
@@ -32,7 +32,15 @@ const User = sequelize.define('User', {
     },
     avatar:{
       type: DataTypes.STRING,
-    }
+    },
+    deleted:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+  },
+  {
+    timestamps: false
   })
 
-  export default User;
+  export default Users;

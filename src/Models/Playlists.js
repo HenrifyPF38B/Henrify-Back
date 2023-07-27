@@ -1,19 +1,16 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Reviews = sequelize.define('Reviews', {
+const Playlists = sequelize.define('Playlists', {
     id:{
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    comment:{
+    name:{
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    rating:{
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      defaultValue: `Playlists`
     },
     deleted:{
       type: DataTypes.BOOLEAN,
@@ -25,4 +22,4 @@ const Reviews = sequelize.define('Reviews', {
     timestamps: false
   })
 
-  export default Reviews;
+  export default Playlists;
