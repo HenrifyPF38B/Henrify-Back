@@ -22,7 +22,7 @@ app.use(express.json());
 //rutas
 app.use('/api', router)
 
-sequelize.sync({force: true})
+sequelize.sync({force: false})
   .then(() => {
     app.listen(3001, () => {
       console.log("server on port 3001")
