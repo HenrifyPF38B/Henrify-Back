@@ -1,11 +1,13 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Songs = sequelize.define('Songs', {
-    id:{
+const Songs = sequelize.define(
+  "Songs",
+  {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     name:{
       type: DataTypes.STRING,
@@ -17,24 +19,33 @@ const Songs = sequelize.define('Songs', {
     },
     launchDate:{
       type: DataTypes.DATEONLY,
+      allowNull: true,
+    },
+    genres: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    launchDate:{
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
     audio:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    image:{
+    image: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    deleted:{
+    deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: false,
     },
   },
   {
-    timestamps: false
-  })
+    timestamps: false,
+  }
+);
 
   export default Songs;

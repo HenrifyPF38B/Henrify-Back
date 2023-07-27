@@ -1,12 +1,10 @@
-import { Sequelize } from 'sequelize'
-import dotenv from 'dotenv'
+import { Sequelize } from "sequelize"
+import { config } from 'dotenv'
+const { DB_DEPLOY } = config().parsed
 
-dotenv.config()
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env
-
-export const sequelize = new Sequelize('henrify', DB_USER, DB_PASSWORD, {
-  host: DB_HOST,
-  dialect: 'postgres',
+export const sequelize = new Sequelize(
+  DB_DEPLOY,
+  {
   logging: false,
   native: false,
 })
