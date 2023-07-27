@@ -33,7 +33,7 @@ const Albums = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    genre:{
+    genres:{
       type: DataTypes.STRING,
       allowNull: false
     },
