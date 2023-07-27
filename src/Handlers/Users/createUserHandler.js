@@ -3,12 +3,12 @@ import { userCreate } from "../../Controllers/Users.controllers.js";
 
 export const createUserHandler = async(req, res) =>{
   try{
-    const createUser = await userCreate(req.body);
+    const { data } = await userCreate(req.body);
 
-    if(createUser === "Email Error" || createUser === "UserName Error"){
-      return res.status(401).json(createUser);
+    if(data === "Email Error" || data === "UserName Error"){
+      return res.status(401).json(data);
     }else{
-      return res.status(200).json(createUser);
+      return res.status(200).json(data);
     }
 
   }catch(error){

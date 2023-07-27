@@ -11,6 +11,10 @@ const Users = sequelize.define('Users', {
       type: DataTypes.STRING,
       allowNull: false
     },
+    favorites:{
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: []
+    },
     lastName:{
       type: DataTypes.STRING,
       allowNull: false
