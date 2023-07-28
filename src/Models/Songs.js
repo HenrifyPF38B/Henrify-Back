@@ -15,10 +15,13 @@ const Songs = sequelize.define('Songs', {
       type: DataTypes.STRING,
       allowNull: false
     },
+<<<<<<< HEAD
     duration:{
       type: DataTypes.STRING,
       allowNull: true,
     },
+=======
+>>>>>>> a2771101fe6f76d6f680709d7310ecc7b5e3fcd5
     launchDate:{
       type: DataTypes.DATEONLY,
       allowNull: true

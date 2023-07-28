@@ -1,6 +1,10 @@
 import express from 'express'
 import { sequelize } from './db.js'
+<<<<<<< HEAD
 import { router } from './Routes/memberships.routes.js'
+=======
+import { router } from './Routes/index.js'
+>>>>>>> a2771101fe6f76d6f680709d7310ecc7b5e3fcd5
 import {
   Albums,
   Genres,
@@ -41,4 +45,8 @@ app.use((err, req, res, next) => {
   const message = err.message || err
   console.error(err)
   res.status(status).send(message)
+<<<<<<< HEAD
 })
+=======
+})
+>>>>>>> a2771101fe6f76d6f680709d7310ecc7b5e3fcd5
