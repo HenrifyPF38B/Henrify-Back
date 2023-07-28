@@ -1,9 +1,11 @@
 import axios from "axios";
 import Albums from "../Models/Albums.js";
 import Playlists from "../Models/Playlists.js";
+import Songs from "../Models/Songs.js";
 
 export const albumsToDb = async() =>{
-  try{
+  try {
+    
     const response = await axios.get("https://spotify-api.up.railway.app/albums");
 
     response.data.map(el => {
@@ -42,8 +44,65 @@ export const playlistsToDb = async() =>{
       })
     });
 
+    
     return console.log("Success");
   }catch(error){
     console.log(error);
   }
 };
+
+
+
+export const getSongsToDb = async (req, res) => {
+ 
+  try {
+    const URL_SONG = "https://spotify-api.up.railway.app/songs";
+    const songsApi = (await axios.get(URL_SONG)).data;
+
+    if (!songsApi) return res.status(400).send("Api Songs no tiene Data");
+ 
+    songsApi.map(async (el) => {
+     const findSong =  await Songs.findAll({
+        where: { name: `${el.trackName}` },
+      });
+      if (!findSong || !findSong.length) {
+        Songs.create({
+         
+            name: el.trackName,
+            songId: el.id,
+            artists: el.artists,
+            audioPreview: el.trackPreview,
+            audioFull: el.trackFull,
+        
+        });
+      }
+        
+ });
+
+    return res.status(200).send("Se cargó Songs");
+    
+  } catch (error) {
+    return res.status(401).json(error.message);
+  }
+   /*  const res = await fetch("https://spotify-api.up.railway.app/songs");
+    const data = await res.json();
+
+    let noRepeatData = [];
+    (async () => {
+      let x = await data.map((el) => {
+        const findSong = noRepeatData.find(
+          (song) => song.trackName === el.trackName
+        );
+        if (!findSong) {
+          noRepeatData.push(el);
+        }
+      });
+  })(); */
+  
+    //return noRepeatData
+   
+};
+
+
+   
+

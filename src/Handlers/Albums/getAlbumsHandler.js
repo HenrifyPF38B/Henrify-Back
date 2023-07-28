@@ -1,6 +1,6 @@
 
 
-const getAlbumsHandler = async (req, res) => {
+/* const getAlbumsHandler = async (req, res) => {
   try {
     const albums = await getAlbums();
     return res.status(200).json(albums);
@@ -11,4 +11,4 @@ const getAlbumsHandler = async (req, res) => {
   }
 }
 
-export default getAlbumsHandler
+export default getAlbumsHandler */

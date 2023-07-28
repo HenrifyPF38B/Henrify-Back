@@ -1,55 +1,62 @@
 import { DataTypes, UUIDV4 } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Users = sequelize.define('Users', {
-    id:{
+const Users = sequelize.define(
+  "Users",
+  {
+    id: {
       type: DataTypes.UUID,
       primaryKey: true,
-      defaultValue: UUIDV4
+      defaultValue: UUIDV4,
     },
-    firstName:{
+    firstName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    favorites:{
+    cart: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      defaultValue: []
+      defaultValue: [],
     },
-    lastName:{
-      type: DataTypes.STRING,
-      allowNull: false
+    favorites: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: [],
     },
-    userName:{
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
-    },
-    email:{
+    lastName: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
     },
-    password:{
+    userName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
       // unique: true
       // Lo comento porque si no cada usuario tendria que tener contraseña distinta
     },
-    admin:{
+    admin: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
-    avatar:{
+    avatar: {
       type: DataTypes.STRING,
     },
-    deleted:{
+    deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: false,
     },
   },
   {
-    timestamps: false
-  })
+    timestamps: false,
+  }
+);
 
   export default Users;
