@@ -1,7 +1,16 @@
 
 
+import { getAllPlaylists } from "../../Controllers/Playlists.controllers.js";
+
+
 const getPlaylistsHandler = async (req, res) => {
-  return res.send('getPlaylistsHandler')
+  try{
+    const getPlaylists = await getAllPlaylists();
+
+    res.status(200).json(getPlaylists)
+  }catch(error){
+    console.log(error);
+  }
 }
 
 export default getPlaylistsHandler
