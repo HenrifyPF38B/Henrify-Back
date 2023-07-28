@@ -6,7 +6,7 @@ export const getAllAlbums = async () => {
   const albums = await Albums.findAll({
     where: { deleted: false },
   })
-  if (!albums) {
+  if (!albums.length) {
      return "No se encontraron Albums";
   }
  
