@@ -17,12 +17,35 @@ export const postReviews = async (comment, rating, userId, albumId) => {
     typeof(userId) !== 'string' || comment.length < 1 ||
     typeof(albumId) !== 'number' || albumId.length < 1
     ) throw Error('Campos obligatorios sin completar')
-  const data = await Reviews.create({ comment, rating })
-
-  const findAlmbum = await Albums.findAll({where:{id: albumId}})
-  console.log(findAlmbum)
-
-  await data.addAlbumId(findAlmbum)
+  const data = await Reviews.create({ comment, rating, userId, albumId })
   
   return data
 }
+
+export const putReviews = async (id, comment, rating) => {
+  const review = await Reviews.findOne({where: { id }})
+  review.comment = comment
+  review.rating = rating
+  await review.save()
+  
+  return review
+}
+
+export const deleteReviews = async (id) => {
+  const review = await Reviews.findOne({where: { id }})
+  review.deleted = true
+  await review.save()
+
+  return review
+}
+
+export const getReviewsById = async (id) => {
+  const data = await Reviews.findOne({
+    where: {
+      deleted: false,
+      id
+    }
+  })
+  return data
+}
+
