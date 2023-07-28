@@ -13,31 +13,31 @@ const Albums = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    albumId:{
+    albumId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    type:{
+    type: {
       type: DataTypes.STRING,
-      allowNull: false
+      defaultValue: "album"
     },
     artists: {
-      type: DataTypes.TEXT, 
-      get: function() {
-          return JSON.parse(this.getDataValue('artists'));
-      }, 
-      set: function(val) {
-          return this.setDataValue('artists', JSON.stringify(val));
-      }
+      type: DataTypes.TEXT,
+      get: function () {
+        return JSON.parse(this.getDataValue("artists"));
+      },
+      set: function (val) {
+        return this.setDataValue("artists", JSON.stringify(val));
+      },
     },
     tracks: {
-      type: DataTypes.TEXT, 
-      get: function() {
-          return JSON.parse(this.getDataValue('tracks'));
-      }, 
-      set: function(val) {
-          return this.setDataValue('tracks', JSON.stringify(val));
-      }
+      type: DataTypes.TEXT,
+      get: function () {
+        return JSON.parse(this.getDataValue("tracks"));
+      },
+      set: function (val) {
+        return this.setDataValue("tracks", JSON.stringify(val));
+      },
     },
     image: {
       type: DataTypes.TEXT,
