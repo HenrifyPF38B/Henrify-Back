@@ -35,10 +35,10 @@ export const playlistsToDb = async() =>{
       Playlists.create({
         type:"playlist",
         name: el.name,
-        playlistId: el.id,
+        playlistId: el.id || el.name,
         artists: el.artists,
         owner: el.owner,
-        image: el.image,
+        image: el.image || el.images,
         tracks: el.tracks,
         price: 23
       })
@@ -67,13 +67,14 @@ export const getSongsToDb = async (req, res) => {
       });
       if (!findSong || !findSong.length) {
         Songs.create({
-         
-            name: el.trackName,
-            songId: el.id,
+            name: el.name,
+            songId: el.songId,
             artists: el.artists,
-            audioPreview: el.trackPreview,
-            audioFull: el.trackFull,
-        
+            audioPreview: el.audioPreview,
+            audioFull: el.audioFull,
+            image: el.image,
+            popularity: el.popularity,
+            explicit: el.explicit
         });
       }
         

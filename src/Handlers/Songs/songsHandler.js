@@ -43,16 +43,19 @@ const deleteSongsHandler = async (req, res, next) => {
 
 const postSongsHandler = async (req, res, next) => {
   try {
-    const { id, name, artists, audio, image, duration, launchDate } = req.body
+    const { id, name, artists, audioPreview, audioFull, popularity, explicit, image, type, songId } = req.body
 
     const newSong = await createSong(
         id,
       name,
       artists,
-      audio,
+      audioPreview,
       image,
-      duration,
-      launchDate
+      type,
+      songId,
+      audioFull,
+      popularity,
+      explicit
     )
 
     res.status(201).json(newSong)
@@ -72,3 +75,4 @@ export {
   deleteSongsHandler,
   postSongsHandler,
 }
+

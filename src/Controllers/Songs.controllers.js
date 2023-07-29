@@ -52,12 +52,16 @@ export const getSongByName = async (name) => {
 };
 
 //***FUNCION: POST - Crea un Song
-export const postSong = async (name, artists, audioFull, image) => {
+export const postSong = async (name, artists, audioFull, image, type, songId, popularity, explicit) => {
 
   //CREA una nueva Song. Si existe el nombre no lo crea
   const newSong = await Song.findOrCreate({
     where: { name: `${name}` },
     defaults: {
+      popularity: `${popularity}`,
+      explicit: `${explicit}`,
+      type: `${type}`,
+      songId: `${songId}`,
       artists: `${artists}`,
       audioFull: `${audioFull}`,
       audioPreview: `${audioPreview}`,
@@ -76,7 +80,11 @@ export const putSongById = async (
   artists,
   audioFull,
   audioPreview,
-  image
+  image,
+  type,
+  explicit,
+  popularity,
+  songId
 ) => {
   //BUSCA Song y Modifica
   const song = await Song.findByPk(+id);
@@ -91,6 +99,10 @@ export const putSongById = async (
   if (audioFull) song.audioFull = audioFull;
   if (audioPreview) song.audioPreview = audioPreview;
   if (image) song.image = image;
+  if (popularity) song.popularity = popularity;
+  if (songId) song.songId = songId;
+  if (explicit) song.explicit = explicit;
+  if (type) song.type = type;
   if (deleted === true || deleted === false) song.deleted = deleted;
 
   await song.save();

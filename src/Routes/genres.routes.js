@@ -1,7 +1,6 @@
 import { Router } from "express";
+
 import getGenresHandler, { deleteGenresHandler, getGenresByIdHandler, postGenresHandler } from "../Handlers/Genres/genresHandler.js";
-
-
 
 export const genresRouter = Router()
 
