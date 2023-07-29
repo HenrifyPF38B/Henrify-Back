@@ -1,47 +1,64 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db.js";
 
-const Songs = sequelize.define('Songs', {
-    id:{
+const Songs = sequelize.define(
+  "Songs",
+  {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
-    name:{
+    name: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    songId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING,
+      defaultValue:"song"
+    },
+    image: {
+      type: DataTypes.TEXT,
       allowNull: false
     },
-    artists:{
-      type: DataTypes.STRING,
+    explicit: {
+      type: DataTypes.BOOLEAN,
       allowNull: false
     },
-<<<<<<< HEAD
-    duration:{
+    popularity:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    artists: {
+      type: DataTypes.TEXT,
+      get: function () {
+        return JSON.parse(this.getDataValue("artists"));
+      },
+      set: function (val) {
+        return this.setDataValue("artists", JSON.stringify(val));
+      },
+    },
+    audioPreview: {
       type: DataTypes.STRING,
       allowNull: true,
     },
-=======
->>>>>>> a2771101fe6f76d6f680709d7310ecc7b5e3fcd5
-    launchDate:{
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
-    audio:{
+    audioFull: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
     },
-    image:{
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    deleted:{
+    deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false
+      defaultValue: false,
     },
   },
   {
-    timestamps: false
-  })
+    timestamps: false,
+  }
+);
 
   export default Songs;

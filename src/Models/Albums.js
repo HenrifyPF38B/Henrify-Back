@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 import { sequelize } from '../db.js'
 
 const Albums = sequelize.define(
-  'Albums',
+  "Albums",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -13,51 +13,43 @@ const Albums = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-<<<<<<< HEAD
-    launchDate:{
+    albumId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    totalSongs:{
-      type: DataTypes.INTEGER,
-      allowNull: false
+    type: {
+      type: DataTypes.STRING,
+      defaultValue: "album"
     },
-    image:{
-=======
     artists: {
->>>>>>> a2771101fe6f76d6f680709d7310ecc7b5e3fcd5
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.TEXT,
+      get: function () {
+        return JSON.parse(this.getDataValue("artists"));
+      },
+      set: function (val) {
+        return this.setDataValue("artists", JSON.stringify(val));
+      },
     },
-    genres: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    tracks: {
+      type: DataTypes.TEXT,
+      get: function () {
+        return JSON.parse(this.getDataValue("tracks"));
+      },
+      set: function (val) {
+        return this.setDataValue("tracks", JSON.stringify(val));
+      },
     },
-    launchDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    totalSongs: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-<<<<<<< HEAD
-    stock:{
-      type: DataTypes.STRING,
-      allowNull: true
-=======
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
->>>>>>> a2771101fe6f76d6f680709d7310ecc7b5e3fcd5
     },
     stock: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     deleted: {
       type: DataTypes.BOOLEAN,
@@ -68,6 +60,6 @@ const Albums = sequelize.define(
   {
     timestamps: false,
   }
-)
+);
 
 export default Albums
