@@ -1,8 +1,8 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../db.js'
 
 const Albums = sequelize.define(
-  "Albums",
+  'Albums',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,7 +19,7 @@ const Albums = sequelize.define(
     },
     type: {
       type: DataTypes.STRING,
-      defaultValue: "album"
+      allowNull: false
     },
     artists: {
       type: DataTypes.TEXT,
@@ -62,6 +62,4 @@ const Albums = sequelize.define(
   }
 );
 
-  
-
-  export default Albums;
+export default Albums
