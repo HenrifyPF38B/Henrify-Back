@@ -63,21 +63,22 @@ export const userFavs = async(data) =>{
     }
   });
 
-  let userFavorites = findUser.dataValues.favorites;
+  
+  let userFavorites = findUser.dataValues.favorites || [];
 
-  if(userFavorites.length === 0){
-    userFavorites.push(productId);
+  if(userFavorites?.length === 0){
+    userFavorites?.push(productId);
   }else{
-    let filter = userFavorites.filter(el => el !== productId);
+    let filter = userFavorites?.filter(el => el !== productId);
 
-    if(filter.length === userFavorites.length){
-      userFavorites.push(productId);
+    if(filter?.length === userFavorites?.length){
+      userFavorites?.push(productId);
     }else{
       userFavorites = filter;
     }
   }
 
-  //console.log(userFavorites);
+  console.log(userFavorites);
 
   const updateUser = await Users.update(
     {
@@ -103,7 +104,7 @@ export const userCart = async (data) => {
     },
   });
 
-  let userCart = findUser.dataValues.cart;
+  let userCart = findUser.dataValues.cart || [];
 
   if (userCart.length === 0) {
     userCart.push(productId);
@@ -129,4 +130,18 @@ export const userCart = async (data) => {
   );
 
   return { data: updateUser };
+};
+
+export const getUsersById = async(id) =>{
+  const findUser = await Users.findOne({
+    where: {
+      id: id
+    }
+  });
+
+  if(!findUser){
+    return { data: "No user found"};
+  };
+
+  return { data: findUser };
 };

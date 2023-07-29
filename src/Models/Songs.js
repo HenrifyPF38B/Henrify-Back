@@ -21,6 +21,18 @@ const Songs = sequelize.define(
       type: DataTypes.STRING,
       defaultValue:"song"
     },
+    image: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    explicit: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
+    },
+    popularity:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     artists: {
       type: DataTypes.TEXT,
       get: function () {

@@ -1,5 +1,4 @@
 import express from "express";
-//import router from './Routes/index.js'
 import { sequelize } from "./db.js";
 import { router } from "./Routes/index.js";
 import cors from "cors";
