@@ -77,7 +77,7 @@ export const userFavs = async(data) =>{
     }
   }
 
-  console.log(userFavorites);
+  //console.log(userFavorites);
 
   const updateUser = await Users.update(
     {
@@ -92,4 +92,41 @@ export const userFavs = async(data) =>{
 
   return { data: updateUser };
 
+};
+
+export const userCart = async (data) => {
+  const { userId, productId } = data;
+
+  const findUser = await Users.findOne({
+    where: {
+      id: userId,
+    },
+  });
+
+  let userCart = findUser.dataValues.cart;
+
+  if (userCart.length === 0) {
+    userCart.push(productId);
+  } else {
+    let filter = userCart.filter((el) => el !== productId);
+
+    if (filter.length === userCart.length) {
+      userCart.push(productId);
+    } else {
+      userCart = filter;
+    }
+  }
+
+  const updateUser = await Users.update(
+    {
+      cart: userCart,
+    },
+    {
+      where: {
+        id: userId,
+      },
+    }
+  );
+
+  return { data: updateUser };
 };

@@ -1,6 +1,7 @@
-import express from 'express'
-import { sequelize } from './db.js'
-import { router } from './Routes/index.js'
+import express from "express";
+//import router from './Routes/index.js'
+import { sequelize } from "./db.js";
+import { router } from "./Routes/index.js";
 import {
   Albums,
   Genres,
@@ -17,10 +18,8 @@ import cors from 'cors';
 
 const app = express()
 
-//middlewares
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+//midelwares
+app.use(express.json());
 
 //rutas
 app.use('/api', router)

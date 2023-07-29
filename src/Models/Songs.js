@@ -9,33 +9,34 @@ const Songs = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    name:{
+    name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    artists:{
+    songId: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    launchDate:{
-      type: DataTypes.DATEONLY,
+    type: {
+      type: DataTypes.STRING,
+      defaultValue:"song"
+    },
+    artists: {
+      type: DataTypes.TEXT,
+      get: function () {
+        return JSON.parse(this.getDataValue("artists"));
+      },
+      set: function (val) {
+        return this.setDataValue("artists", JSON.stringify(val));
+      },
+    },
+    audioPreview: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
-    genres: {
+    audioFull: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    launchDate:{
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    audio:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     deleted: {
       type: DataTypes.BOOLEAN,

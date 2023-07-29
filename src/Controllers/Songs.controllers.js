@@ -1,54 +1,3 @@
-<<<<<<< HEAD
-import Songs from './../Models/Songs.js'
-
-export const getAllSongs = async () => {
-  const songs = await Songs.findAll()
-
-  return { data: songs }
-}
-
-export const getSongById = async (id) => {
-  const song = await Songs.findByPk(id)
-
-  if (!song) {
-    return { message: `No se encontraron canciones con el ID ${id}` }
-  }
-
-  return song
-}
-
-export const deleteSongById = async (id) => {
-  const song = await Songs.findByPk(id)
-
-  if (!song) {
-    return null
-  }
-
-  await song.destroy()
-  return song
-}
-export const createSong = async (
-  id,
-  name,
-  artists,
-  audio,
-  image,
-  duration,
-  launchDate
-) => {
-  const newSong = await Songs.create({
-    id,
-    name,
-    artists,
-    audio,
-    image,
-    duration,
-    launchDate,
-  })
-
-  return newSong
-}
-=======
 import Albums from "../Models/Albums.js";
 import Genres from "../Models/Genres.js";
 import Song from "../Models/Songs.js";
@@ -79,13 +28,7 @@ export const getSongById = async (id) => {
 export const getSong = async () => {
   const songs = await Song.findAll({
     where: { deleted: false },
-    include: [
-      {
-        model: Albums,
-        as: "Album", 
-        attributes: ["name"], 
-      },
-    ],
+   
   });
 
   if (songs.length) return { data: songs };
@@ -100,13 +43,6 @@ export const getSongByName = async (name) => {
         [Op.iLike]: `%${name}%`,
       },
     },
-    include: [
-      {
-        model: Albums,
-        as: "Album",
-        attributes: ["name"],
-      },
-    ],
   });
 
   if (!songs || !songs.length) {
@@ -116,97 +52,32 @@ export const getSongByName = async (name) => {
 };
 
 //***FUNCION: POST - Crea un Song
-export const postSong = async (
-  name,
-  artists,
-  launchDate,
-  genres,
-  audio,
-  image,
-  AlbumId
-) => {
-  let errorInfo = "";
-
-  //VALIDA si existe GENRE
-  const validGenres = await Genres.findAll({
-    where: { name: genres },
-  });
-  if (
-    !validGenres ||
-    validGenres === null ||
-    validGenres === undefined ||
-    !validGenres.length
-  ) {
-    return "No existen Datos en Genres y/o no existe el name: " + genres;
-  }
-
-  // VALIDA si existe el ID del AlbumId y/o si Hay DATA
-  if (AlbumId !== 0 || AlbumId) {
-    const validAlbumId = await Albums.findByPk(AlbumId);
-    if (!validAlbumId)
-      return "No existen Datos en Albums y/o no existe el ID: " + AlbumId;
-  }
+export const postSong = async (name, artists, audioFull, image) => {
 
   //CREA una nueva Song. Si existe el nombre no lo crea
-  if (AlbumId === 0 || !AlbumId) {
-    const newSong = await Song.findOrCreate({
-      where: { name: `${name}` },
-      defaults: {
-        artists: `${artists}`,
-        launchDate: `${launchDate}`,
-        genres: `${genres}`,
-        audio: `${audio}`,
-        image: `${image}`,
-        // AlbumId: `${AlbumId}`,
-      },
-    });
-    //VERIFICAR si se creó un nuevo registro
-    const createdNewSong = newSong[1];
-    if (createdNewSong) return { data: newSong };
-    return "Se encontró un registro existente con el mismo nombre.";
-  } else {
-    const newSong = await Song.findOrCreate({
-      where: { name: `${name}` },
-      defaults: {
-        artists: `${artists}`,
-        launchDate: `${launchDate}`,
-        genres: `${genres}`,
-        audio: `${audio}`,
-        image: `${image}`,
-        AlbumId: `${AlbumId}`,
-      },
-    });
-    //VERIFICAR si se creó un nuevo registro
-    const createdNewSong = newSong[1];
-    if (createdNewSong) return { data: newSong };
-    return "Se encontró un registro existente con el mismo nombre.";
-  }
+  const newSong = await Song.findOrCreate({
+    where: { name: `${name}` },
+    defaults: {
+      artists: `${artists}`,
+      audioFull: `${audioFull}`,
+      audioPreview: `${audioPreview}`,
+      image: `${image}`,
+    },
+  });
+  //VERIFICAR si se creó un nuevo registro
+  const createdNewSong = newSong[1];
+  if (createdNewSong) return { data: newSong };
+  return "Se encontró un registro existente con el mismo nombre.";
 };
 
 //***FUNCION: Put Song - Modificar un campo de Song
 export const putSongById = async (
-  id,
   name,
   artists,
-  launchDate,
-  genres,
-  audio,
-  image,
-  deleted,
-  AlbumId
+  audioFull,
+  audioPreview,
+  image
 ) => {
-  // VALIDA si existe el ID del AlbumId y/o si Hay DATA
-  const validAlbumId = await Albums.findByPk(AlbumId);
-  if (!validAlbumId)
-    return "No existen Datos en Albums y/o no existe el ID: " + AlbumId;
-
-  //VALIDA si existe GENRE
-  const validGenres = await Genres.findAll({
-    where: { name: genres },
-  });
-  if (!validGenres || validGenres === null || !validGenres.length)
-    return "No existen Datos en Genres y/o no existe el Genre: " + genres;
-
   //BUSCA Song y Modifica
   const song = await Song.findByPk(+id);
 
@@ -216,20 +87,15 @@ export const putSongById = async (
 
   if (name) song.name = name;
   if (artists) song.artists = artists;
-  //Fecha validada en el Handler
-  if (launchDate) song.launchDate = launchDate;
   //URL verificado en el Handler
-  if (song) song.audio = audio;
+  if (audioFull) song.audioFull = audioFull;
+  if (audioPreview) song.audioPreview = audioPreview;
   if (image) song.image = image;
   if (deleted === true || deleted === false) song.deleted = deleted;
 
-  //AlbumId ya está verificado
-  song.AlbumId = AlbumId;
-
   await song.save();
+
   if (song) return { data: song };
   return "No se guardó los cambios";
-
 };
 
->>>>>>> 07fd14004aea79381b78929cd8fee59138fc5628

@@ -6,8 +6,11 @@ export const getAllAlbums = async () => {
   const albums = await Albums.findAll({
     where: { deleted: false },
   })
-
-  return { data: albums }
+  if (!albums.length) {
+     return "No se encontraron Albums";
+  }
+ 
+  return { data: albums };
 }
 
 export const searchAlbums = async (name) => {
@@ -24,7 +27,7 @@ export const searchAlbums = async (name) => {
   if (databaseAlbums.length === 0) {
     return 'No se encontraron albums.'
   }
-  return [...databaseAlbums]
+  return { data: databaseAlbums };
 }
 
 export const getAlbumById = async (id) => {
@@ -34,7 +37,7 @@ export const getAlbumById = async (id) => {
     return { message: `No se encontraron álbumes con el ID ${id}` }
   }
 
-  return album
+  return { data: album };
 }
 
 export const deleteAlbumById = async (id) => {
@@ -47,57 +50,40 @@ export const deleteAlbumById = async (id) => {
   album.deleted = true
   await album.save()
 
-  return album
+  return { data: album };
 }
 
-export const createAlbum = async (
-  name,
-  artists,
-  genres,
-  launchDate,
-  totalSongs,
-  image,
-  price,
-  stock,
-) =>
-  await Albums.create({
-    name,
-    artists,
-    genres,
-    launchDate,
-    totalSongs,
-    image,
-    price,
-    stock,
-  })
+export const createAlbum = async (newAlbum) => {
+   await Albums.create(newAlbum);
+   return { data: createAlbum };
+}
+ 
 
 export const modifyAlbum = async (
   id,
   name,
   artists,
-  genres,
-  launchDate,
-  totalSongs,
+  tracks,
   image,
   price,
   stock,
+  deleted,
 ) => {
   const album = await Albums.findByPk(id)
 
   if (!album) {
-    throw new Error(`No se encontró el álbum con el ID ${id}`)
+   return (`No se encontró el álbum con el ID ${id}`)
   }
-
+  
   if (name) album.name = name
   if (artists) album.artists = artists
-  if (genres) album.genres = genres
-  if (launchDate) album.launchDate = launchDate
-  if (totalSongs) album.totalSongs = totalSongs
+  if (tracks) album.artists = artists;
   if (image) album.image = image
   if (price) album.price = price
   if (stock) album.stock = stock
+   if (deleted) album.deleted = deleted;
 
   await album.save()
 
-  return album
+  return { data: album }
 }
