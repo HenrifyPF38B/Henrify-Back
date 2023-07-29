@@ -17,5 +17,4 @@ router.use('/playlists', playlistsRouter)
 router.use('/albums', albumsRouter)
 router.use('/memberships', membershipsRouter)
 router.use('/genres', genresRouter)
-router.use("/create_preference", mercadoPagoRouter);
-
+router.use('/create_preference', mercadoPagoRouter)

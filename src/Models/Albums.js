@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../db.js'
 
 const Albums = sequelize.define(
   "Albums",
@@ -62,6 +62,4 @@ const Albums = sequelize.define(
   }
 );
 
-  
-
-  export default Albums;
+export default Albums

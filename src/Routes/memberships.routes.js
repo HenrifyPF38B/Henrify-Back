@@ -1,9 +1,7 @@
 import { Router } from "express";
-import {getMembershipsHandler} from "../Handlers/Memberships/membershipsHandler.js";
-import {getMembershipsByIdHandler} from "../Handlers/Memberships/membershipsHandler.js";
-import {postMembershipsHandler} from "../Handlers/Memberships/membershipsHandler.js";
-import {putMembershipsHandler} from "../Handlers/Memberships/membershipsHandler.js";
-import {deleteMembershipsHandler} from "../Handlers/Memberships/membershipsHandler.js";
+
+import { deleteMembershipsHandler, getMembershipsByIdHandler, getMembershipsHandler, postMembershipsHandler, putMembershipsHandler } from "../Handlers/Memberships/membershipsHandler.js";
+
 
 export const membershipsRouter = Router()
 
