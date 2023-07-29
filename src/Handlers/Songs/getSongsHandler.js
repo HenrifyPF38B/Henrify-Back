@@ -9,8 +9,9 @@ const getSongsHandler = async (req, res, next) => {
     if (!result.data) return res.status(400).json({ error: result });
 
     return res.status(200).json(result);
+    
   } catch (error) {
-    next(error);
+     res.status(400).json({ error: error.message });
   }
 };
 

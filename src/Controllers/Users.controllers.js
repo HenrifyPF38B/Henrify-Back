@@ -1,20 +1,20 @@
 import Users  from '../Models/Users.js'
-import { Op } from "sequelize";
+//import { Op } from "sequelize";
 
-
+// *** FUNCION: Login
 export const userLogin = async(user) =>{
   const { credential, password } = user;
  
   const findUserByEmail = await Users.findOne({
     where: {
-      email: credential
-    }
+      email: credential,
+    },
   });
 
   const findUserByUsername = await Users.findOne({
     where: {
-      userName: credential
-    }
+      userName: credential,
+    },
   });
 
   if(!findUserByEmail && !findUserByUsername){
@@ -33,7 +33,7 @@ export const userLogin = async(user) =>{
  
 }
 
-
+//***FUNCION: Create a User
 export const userCreate = async(newUser) =>{
 
   const { email, userName } = newUser;
@@ -53,6 +53,39 @@ export const userCreate = async(newUser) =>{
     return {data: createUser};
 }
 
+//***FUNCION: Get Users
+export const getUsers = async () => {
+  const users = await Users.findAll({
+    where: { deleted: false },
+   
+  });
+
+  if (!users.length || !users)
+    return "No hay Users";
+  return { data: users };
+};
+
+//***FUNCION: Delete User By Id
+export const deleteUserById = async (id) => {
+  //return{data:id}
+  const user = await Users.findByPk(id);
+  if (!user) {
+    return (`No se encontraron users con el ID ${id}`)
+  }
+   user.deleted = true;
+  await user.save();
+  
+  return { data: user };
+};
+
+//***FUNCION: Get UsersById
+export const getUsersById = async (id) => {
+  
+  const users = await Users.findByPk(id)
+
+  if (!users.length || !users) return "No hay Users con el ID: " + id;
+  return { data: users };
+};
 
 export const userFavs = async(data) =>{
   const { userId, productId } = data;
@@ -77,8 +110,7 @@ export const userFavs = async(data) =>{
     }
   }
 
-  //console.log(userFavorites);
-
+  //***FUNCION: PUT User - Actualizar
   const updateUser = await Users.update(
     {
     favorites: userFavorites
