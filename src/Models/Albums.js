@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 import { sequelize } from '../db.js'
 
 const Albums = sequelize.define(
-  'Albums',
+  "Albums",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,7 +19,7 @@ const Albums = sequelize.define(
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false
+      defaultValue: "album"
     },
     artists: {
       type: DataTypes.TEXT,

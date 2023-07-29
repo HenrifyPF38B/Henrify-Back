@@ -1,3 +1,4 @@
+
 import Albums from '../Models/Albums.js'
 import { Sequelize } from 'sequelize'
 
@@ -87,3 +88,4 @@ export const modifyAlbum = async (
 
   return { data: album }
 }
+

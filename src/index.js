@@ -1,7 +1,7 @@
 import express from "express";
-//import router from './Routes/index.js'
 import { sequelize } from "./db.js";
 import { router } from "./Routes/index.js";
+import cors from "cors";
 import {
   Albums,
   Genres,
@@ -11,33 +11,32 @@ import {
   ShoppingCarts,
   Songs,
   Users,
-  Products,
+  Products
 } from './Models/relations.js'
-import cors from 'cors';
-
 
 const app = express()
 
 //midelwares
 app.use(express.json());
+app.use(cors())
 
 //rutas
 app.use('/api', router)
 
-sequelize
-  .sync({ force: true })
+sequelize.sync({force: false})
   .then(() => {
     app.listen(3001, () => {
-      console.log('server on port 3001')
+      console.log("server on port 3001")
     })
   })
   .catch((error) => {
     console.log(error)
   })
 
-app.use((err, req, res, next) => {
-  const status = err.status || 500
-  const message = err.message || err
-  console.error(err)
-  res.status(status).send(message)
-})
+  app.use((err, req, res, next) => {
+    const status = err.status || 500;
+    const message = err.message || err;
+    console.error(err);
+    res.status(status).send(message);
+  });
+
