@@ -14,13 +14,8 @@ const Users = sequelize.define(
       allowNull: false,
     },
     cart: {
-      type: DataTypes.TEXT, 
-      get: function() {
-          return JSON.parse(this.getDataValue('cart'));
-      }, 
-      set: function(val) {
-          return this.setDataValue('cart', JSON.stringify(val));
-      }
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: []
     },
     favorites: {
       type: DataTypes.ARRAY(DataTypes.STRING),
