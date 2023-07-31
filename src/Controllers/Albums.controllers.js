@@ -1,3 +1,4 @@
+
 import Albums from '../Models/Albums.js'
 import { Sequelize } from 'sequelize'
 
@@ -74,7 +75,7 @@ export const modifyAlbum = async (
   if (!album) {
    return (`No se encontró el álbum con el ID ${id}`)
   }
-
+  
   if (name) album.name = name
   if (artists) album.artists = artists
   if (tracks) album.artists = artists;
@@ -87,3 +88,4 @@ export const modifyAlbum = async (
 
   return { data: album }
 }
+
