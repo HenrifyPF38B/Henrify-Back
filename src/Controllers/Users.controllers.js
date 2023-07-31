@@ -1,3 +1,5 @@
+import Albums from '../Models/Albums.js';
+import Playlists from '../Models/Playlists.js';
 import Users  from '../Models/Users.js'
 import { Op } from "sequelize";
 
@@ -96,7 +98,7 @@ export const userFavs = async(data) =>{
 };
 
 export const userCart = async (data) => {
-  const { userId, productId } = data;
+  const { userId, product } = data;
 
   const findUser = await Users.findOne({
     where: {
@@ -105,15 +107,17 @@ export const userCart = async (data) => {
   });
 
   
-  let userCart = findUser.dataValues.cart || [];
+  let userCart = JSON.parse(findUser.dataValues.cart) || [];
+  
 
   if(userCart?.length === 0){
-    userCart?.push(productId);
+    userCart?.push(product);
+
   }else{
-    let filter = userCart?.filter(el => el !== productId);
+    let filter = userCart?.filter(el => el.name !== product.name);
 
     if(filter?.length === userCart?.length){
-      userCart?.push(productId);
+      userCart?.push(product);
     }else{
       userCart = filter;
     }

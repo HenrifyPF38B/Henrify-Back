@@ -7,6 +7,7 @@ import { albumsRouter } from './albums.routes.js'
 import { membershipsRouter } from './memberships.routes.js'
 import { genresRouter } from './genres.routes.js'
 import { mercadoPagoRouter } from "./mercadopago.routes.js";
+import { ordersRouter } from "./orders.routes.js";
 
 export const router = Router()
 
@@ -17,4 +18,6 @@ router.use('/playlists', playlistsRouter)
 router.use('/albums', albumsRouter)
 router.use('/memberships', membershipsRouter)
 router.use('/genres', genresRouter)
-router.use('/create_preference', mercadoPagoRouter)
+
+router.use('/orders', ordersRouter)
+router.use("/create_preference", mercadoPagoRouter);
