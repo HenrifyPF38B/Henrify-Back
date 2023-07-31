@@ -7,12 +7,17 @@ import Albums  from './Albums.js'
 import Songs  from './Songs.js'
 import Genres  from './Genres.js'
 import Products  from './Products.js'
+import Orders from './Orders.js'
 
 //RELACIONES DE USUARIO
 Users.hasMany(Reviews)
 Users.hasOne(Memberships)
 Users.belongsTo(ShoppingCarts)
 Users.hasMany(Playlists)
+Users.hasMany(Orders)
+
+// RELACION DE ORDERS
+Orders.belongsTo(Users)
 
 //RELACIONES DE SHOPPINGCARTs
 ShoppingCarts.belongsTo(Users)

@@ -1,1 +1,1 @@
-DB_DEPLOY = postgresql://postgres:xFAJ2aGI3eXurA5YQhSP@containers-us-west-119.railway.app:6260/railway
+DB_DEPLOY = postgresql://postgres:CprdfpLCJd4fCzrw3fNo@containers-us-west-114.railway.app:8055/railway
