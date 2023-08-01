@@ -16,7 +16,9 @@ usersRouter.post('/register', createUserHandler)
 usersRouter.put('/favs', favsUserHandler)
 usersRouter.put("/cart", putUserCartHandler);
 usersRouter.get('/:id',getUsersByIdHandler)
+usersRouter.put('/', putUsersHandler)
+usersRouter.delete('/:id', deleteUsersHandler)
+
 /* usersRouter.get('/', getUsersHandler)
 usersRouter.post('/', postUsersHandler)
-usersRouter.put('/:id', putUsersHandler)
-usersRouter.delete('/:id', deleteUsersHandler) */
+usersRouter.put('/:id', putUsersHandler)*/

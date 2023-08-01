@@ -53,6 +53,11 @@ const Users = sequelize.define(
     avatar: {
       type: DataTypes.STRING,
     },
+    googleUser:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

@@ -1,4 +1,5 @@
 import Orders from "../Models/Orders.js";
+import Users from "../Models/Users.js";
 import { ordersRouter } from "../Routes/orders.routes.js";
 
 
@@ -21,6 +22,7 @@ export const createOrder = async(order) =>{
   const createOrder = await Orders.create({
     userId: order.order.userId,
     items: order.order.items,
+    orderId: order.order.orderId,
     shippingAddress: order.order.shippingAddress,
     billingAddress: order.order.billingAddress,
     shippingMethod: order.order.shippingMethod,
@@ -28,5 +30,18 @@ export const createOrder = async(order) =>{
     contactEmail: order.order.contactEmail
   });
 
-  return {data: "Success"};
+  const findUser = await Users.findOne({
+    where:{
+      id: order.order.userId
+    }
+  });
+
+  findUser.update({
+    cart: []
+  });
+
+  findUser.save();
+
+ 
+  return {data: createOrder.dataValues};
 };

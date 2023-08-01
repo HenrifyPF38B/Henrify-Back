@@ -10,7 +10,7 @@ mercadopago.configure({
 export const postMercadoPago = (req, res) => {
   let getItems = req.body.items;
 
-  console.log(getItems);
+  
 
   let preference = {
     items: getItems,
