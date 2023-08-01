@@ -31,8 +31,8 @@ Reviews.belongsTo(Albums)
 
 //RELACIONES DE MEMBERSHIPsS
 Memberships.hasMany(Users)
-Memberships.belongsToMany(Albums, { through: Playlists })
-Memberships.belongsToMany(Songs, { through: Playlists })
+// Memberships.belongsToMany(Albums, { through: Playlists })
+// Memberships.belongsToMany(Songs, { through: Playlists })
 
 //RELACIONES DE PLAYLIST
 Playlists.belongsTo(Users)

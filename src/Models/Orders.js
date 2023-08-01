@@ -13,13 +13,26 @@ const Orders = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false
     },
+    orderId:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    orderStatus:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Ordered"
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     items: {
       type: DataTypes.TEXT,
       get: function () {
-        return JSON.parse(this.getDataValue("artists"));
+        return JSON.parse(this.getDataValue("items"));
       },
       set: function (val) {
-        return this.setDataValue("artists", JSON.stringify(val));
+        return this.setDataValue("items", JSON.stringify(val));
       }
     },
     shippingAddress: {

@@ -152,3 +152,55 @@ export const getUsersById = async(id) =>{
 
   return { data: findUser };
 };
+
+
+export const updateUser = async(data) =>{
+
+  const { userId, newData } = data;
+  console.log(newData);
+  const findUser = await Users.findOne({
+    where: {
+      id: userId
+    }
+  });
+
+  if(!findUser){
+    return { data: "No user found"};
+  }
+
+  if(newData.email){
+    findUser.update({
+      userName: newData.userName,
+      email: newData.email,
+      firstName: newData.firstName,
+      lastName: newData.lastName
+    });
+  
+    findUser.save();
+  }else{
+    findUser.update({
+      password: newData.password
+    });
+  
+    findUser.save();
+  }
+
+  return { data: "User updated" };
+};
+
+
+export const deleteUser = async(userId) =>{
+  const findUser = await Users.findOne({
+    where: {
+      id: userId
+    }
+  });
+
+  if(!findUser){
+    return {data: "No user found"};
+  };
+
+  findUser.destroy();
+
+  return {data: "User deleted"};
+};
