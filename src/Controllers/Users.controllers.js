@@ -52,9 +52,26 @@ export const userCreate = async(newUser) =>{
 
     const createUser = await Users.create(newUser);
 
-    return {data: createUser};
+    return {data: "User created"};
 }
 
+export const googleAuth = async(newUser) =>{
+  const findUser = await Users.findOne({
+    where:{
+      email: newUser.email
+    }
+  });
+
+  if(findUser){
+    return {data: findUser};
+  }else{
+    const createUser = await Users.create(newUser);
+
+    // return {data: "User created"};
+
+    return {data: {msg: "User created", user: createUser.dataValues}}
+  }
+};
 
 export const userFavs = async(data) =>{
   const { userId, productId } = data;
