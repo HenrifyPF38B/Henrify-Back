@@ -23,6 +23,7 @@ export const createOrder = async(order) =>{
     userId: order.order.userId,
     items: order.order.items,
     orderId: order.order.orderId,
+    date: order.order.date,
     shippingAddress: order.order.shippingAddress,
     billingAddress: order.order.billingAddress,
     shippingMethod: order.order.shippingMethod,

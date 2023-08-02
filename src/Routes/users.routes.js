@@ -8,16 +8,18 @@ import { loginUserHandler } from "../Handlers/Users/loginUserHandler.js";
 import { createUserHandler } from "../Handlers/Users/createUserHandler.js";
 import { favsUserHandler } from "../Handlers/Users/favsUserHandler.js";
 import { putUserCartHandler } from "../Handlers/Users/putUsersCatHandler.js";
+import { googleAuthHandler } from "../Handlers/Users/googleAuthHandler.js";
 
 export const usersRouter = Router()
 
+usersRouter.post('/googleAuth', googleAuthHandler)
 usersRouter.post('/login', loginUserHandler)
 usersRouter.post('/register', createUserHandler)
 usersRouter.put('/favs', favsUserHandler)
 usersRouter.put("/cart", putUserCartHandler);
 usersRouter.get('/:id',getUsersByIdHandler)
-usersRouter.put('/', putUsersHandler)
-usersRouter.delete('/:id', deleteUsersHandler)
+usersRouter.put('/', putUsersHandler);
+usersRouter.delete('/:id', deleteUsersHandler);
 
 /* usersRouter.get('/', getUsersHandler)
 usersRouter.post('/', postUsersHandler)
