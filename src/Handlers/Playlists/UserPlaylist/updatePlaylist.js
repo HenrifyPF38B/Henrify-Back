@@ -1,4 +1,4 @@
-import { updateUserPlaylist } from "../../../Controllers/Playlists.controllers";
+import { updateUserPlaylist } from "../../../Controllers/Playlists.controllers.js";
 
 
 export const updateUserPlaylistHandler = async(req, res)=>{
