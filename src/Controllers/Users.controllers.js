@@ -217,7 +217,28 @@ export const deleteUser = async(userId) =>{
     return {data: "No user found"};
   };
 
-  findUser.destroy();
+  await findUser.update({
+    deleted: true
+  });
 
   return {data: "User deleted"};
 };
+
+export const getAllUsers = async () => {
+  const data = await Users.findAll()
+  const total = data.length
+  let activos = 0
+  let desactivados = 0
+
+  for(let value of data){
+    if(value.deleted === false) activos ++;
+    else { desactivados ++ }
+  }
+
+  return {
+    total,
+    activos,
+    desactivados,
+    data
+  }
+}

@@ -11,7 +11,10 @@ export const getAllAlbums = async () => {
      return "No se encontraron Albums";
   }
  
-  return { data: albums };
+  return { 
+    total: albums.length,
+    data: albums 
+  };
 }
 
 export const searchAlbums = async (name) => {

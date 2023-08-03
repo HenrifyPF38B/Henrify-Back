@@ -31,7 +31,17 @@ export const getSong = async () => {
    
   });
 
-  if (songs.length) return { data: songs };
+  let totalPreviews = 0
+  let totalExplicit = 0
+  for(let value of songs){
+    if(value.explicit === true) totalExplicit ++;
+  }
+
+  if (songs.length) return { 
+    total: songs.length,
+    totalExplicit,
+    data: songs 
+  };
   return "No hay Songs";
 };
 
