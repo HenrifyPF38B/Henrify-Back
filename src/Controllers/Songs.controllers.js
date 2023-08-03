@@ -35,15 +35,16 @@ export const getSong = async () => {
   let totalExplicit = 0
   for(let value of songs){
     if(value.explicit === true) totalExplicit ++;
-  }
-
-  if (songs.length) return { 
-    total: songs.length,
-    totalExplicit,
-    data: songs 
   };
-  return "No hay Songs";
-};
+
+  if (songs.length){
+    return { 
+      total: songs.length,
+      totalExplicit,
+      data: songs 
+    };
+  } 
+
 
 //***FUNCION: Get Songs by name
 export const getSongByName = async (name) => {

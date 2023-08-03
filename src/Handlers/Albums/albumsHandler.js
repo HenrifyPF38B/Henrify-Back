@@ -23,6 +23,8 @@ const getAlbumsHandler = async (req, res, next) => {
   }
 };
 
+
+
 const getAlbumsByIdHandler = async (req, res, next) => {
   const { id } = req.params;
   try {

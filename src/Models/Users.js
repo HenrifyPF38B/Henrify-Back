@@ -58,6 +58,14 @@ const Users = sequelize.define(
       allowNull: false,
       defaultValue: false
     },
+    member: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    memberExpire:{
+      type: DataTypes.DATE,
+      allowNull: true
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
