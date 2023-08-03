@@ -1,4 +1,5 @@
-
+import Albums from "../Models/Albums.js";
+import Genres from "../Models/Genres.js";
 import Song from "../Models/Songs.js";
 import { Op } from "sequelize";
 
@@ -43,8 +44,7 @@ export const getSong = async () => {
       data: songs 
     };
   } 
-  return "No hay Songs";
-};
+
 
 //***FUNCION: Get Songs by name
 export const getSongByName = async (name) => {
@@ -121,3 +121,4 @@ export const putSongById = async (
   if (song) return { data: song };
   return "No se guardó los cambios";
 };
+
