@@ -5,6 +5,9 @@ import postPlaylistsHandler from "../Handlers/Playlists/postPlaylistsHandler.js"
 import putPlaylistsHandler from "../Handlers/Playlists/putPlaylistsHandler.js";
 import deletePlaylistsHandler from "../Handlers/Playlists/deletePlaylistsHandler.js";
 import { playlistsToDb } from "../Util/initFetch.js";
+import { deleteUserPlaylistHandler } from "../Handlers/Playlists/UserPlaylist/deleteUserPlaylist.js";
+import { updateUserPlaylistHandler } from "../Handlers/Playlists/UserPlaylist/updatePlaylist.js";
+import createUserPlaylistHandler from "../Handlers/Playlists/UserPlaylist/createPlaylist.js";
 
 export const playlistsRouter = Router()
 
@@ -13,6 +16,12 @@ playlistsRouter.get('/:id',getPlaylistsByIdHandler)
 playlistsRouter.post('/', postPlaylistsHandler)
 playlistsRouter.put('/:id', putPlaylistsHandler)
 playlistsRouter.delete('/:id', deletePlaylistsHandler)
+
+// User playlists
+playlistsRouter.delete('/user/:playlistId', deleteUserPlaylistHandler)
+playlistsRouter.put('/user/update', updateUserPlaylistHandler)
+playlistsRouter.post('/user/create', createUserPlaylistHandler)
+
 
 
 

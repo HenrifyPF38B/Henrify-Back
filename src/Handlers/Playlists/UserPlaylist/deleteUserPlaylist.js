@@ -1,4 +1,4 @@
-import { deleteUserPlaylist } from "../../../Controllers/Playlists.controllers";
+import { deleteUserPlaylist } from "../../../Controllers/Playlists.controllers.js";
 
 
 export const deleteUserPlaylistHandler = async(req, res)=>{

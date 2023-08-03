@@ -1,4 +1,4 @@
-import { createUserPlaylist } from "../../Controllers/Playlists.controllers.js";
+import { createUserPlaylist } from "../../../Controllers/Playlists.controllers.js";
 
 
 const createUserPlaylistHandler = async (req, res) => {
