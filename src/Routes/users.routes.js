@@ -2,7 +2,7 @@ import { Router } from "express";
 import getUsersHandler from "../Handlers/Users/getUsersHandler.js";
 import getUsersByIdHandler from "../Handlers/Users/getUsersByIdHandler.js";
 import postUsersHandler from "../Handlers/Users/postUsersHandler.js";
-import putUsersHandler from "../Handlers/Users/putUsersHandler.js";
+import { putUsersHandler } from "../Handlers/Users/putUsersHandler.js";
 import deleteUsersHandler from "../Handlers/Users/deleteUsersHandler.js";
 import { loginUserHandler } from "../Handlers/Users/loginUserHandler.js";
 import { createUserHandler } from "../Handlers/Users/createUserHandler.js";
@@ -15,8 +15,8 @@ usersRouter.post('/login', loginUserHandler)
 usersRouter.post('/register', createUserHandler)
 usersRouter.put('/favs', favsUserHandler)
 usersRouter.put("/cart", putUserCartHandler);
+usersRouter.put('user/:id', putUsersHandler)
 /* usersRouter.get('/', getUsersHandler)
 usersRouter.get('/:id',getUsersByIdHandler)
 usersRouter.post('/', postUsersHandler)
-usersRouter.put('/:id', putUsersHandler)
 usersRouter.delete('/:id', deleteUsersHandler) */

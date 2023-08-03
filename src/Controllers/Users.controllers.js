@@ -1,3 +1,5 @@
+import Albums from '../Models/Albums.js';
+import Playlists from '../Models/Playlists.js';
 import Users  from '../Models/Users.js'
 import { Op } from "sequelize";
 
@@ -50,9 +52,26 @@ export const userCreate = async(newUser) =>{
 
     const createUser = await Users.create(newUser);
 
-    return {data: createUser};
+    return {data: "User created"};
 }
 
+export const googleAuth = async(newUser) =>{
+  const findUser = await Users.findOne({
+    where:{
+      email: newUser.email
+    }
+  });
+
+  if(findUser){
+    return {data: findUser};
+  }else{
+    const createUser = await Users.create(newUser);
+
+    // return {data: "User created"};
+
+    return {data: {msg: "User created", user: createUser.dataValues}}
+  }
+};
 
 export const userFavs = async(data) =>{
   const { userId, productId } = data;
@@ -63,21 +82,22 @@ export const userFavs = async(data) =>{
     }
   });
 
-  let userFavorites = findUser.dataValues.favorites;
+  
+  let userFavorites = findUser.dataValues.favorites || [];
 
-  if(userFavorites.length === 0){
-    userFavorites.push(productId);
+  if(userFavorites?.length === 0){
+    userFavorites?.push(productId);
   }else{
-    let filter = userFavorites.filter(el => el !== productId);
+    let filter = userFavorites?.filter(el => el !== productId);
 
-    if(filter.length === userFavorites.length){
-      userFavorites.push(productId);
+    if(filter?.length === userFavorites?.length){
+      userFavorites?.push(productId);
     }else{
       userFavorites = filter;
     }
   }
 
-  //console.log(userFavorites);
+  console.log(userFavorites);
 
   const updateUser = await Users.update(
     {
@@ -95,7 +115,7 @@ export const userFavs = async(data) =>{
 };
 
 export const userCart = async (data) => {
-  const { userId, productId } = data;
+  const { userId, product } = data;
 
   const findUser = await Users.findOne({
     where: {
@@ -103,30 +123,122 @@ export const userCart = async (data) => {
     },
   });
 
-  let userCart = findUser.dataValues.cart;
+  
+  let userCart = JSON.parse(findUser.dataValues.cart) || [];
+  
 
-  if (userCart.length === 0) {
-    userCart.push(productId);
-  } else {
-    let filter = userCart.filter((el) => el !== productId);
+  if(userCart?.length === 0){
+    userCart?.push(product);
 
-    if (filter.length === userCart.length) {
-      userCart.push(productId);
-    } else {
+  }else{
+    let filter = userCart?.filter(el => el.name !== product.name);
+
+    if(filter?.length === userCart?.length){
+      userCart?.push(product);
+    }else{
       userCart = filter;
     }
   }
 
+  console.log(userCart);
+
   const updateUser = await Users.update(
     {
-      cart: userCart,
+    cart: userCart
     },
     {
-      where: {
-        id: userId,
-      },
+      where:{
+        id: userId
+      }
     }
   );
 
   return { data: updateUser };
 };
+
+export const getUsersById = async(id) =>{
+  const findUser = await Users.findOne({
+    where: {
+      id: id
+    }
+  });
+
+  if(!findUser){
+    return { data: "No user found"};
+  };
+
+  return { data: findUser };
+};
+
+
+export const updateUser = async(data) =>{
+
+  const { userId, newData } = data;
+  console.log(newData);
+  const findUser = await Users.findOne({
+    where: {
+      id: userId
+    }
+  });
+
+  if(!findUser){
+    return { data: "No user found"};
+  }
+
+  if(newData.email){
+    findUser.update({
+      userName: newData.userName,
+      email: newData.email,
+      firstName: newData.firstName,
+      lastName: newData.lastName
+    });
+  
+    findUser.save();
+  }else{
+    findUser.update({
+      password: newData.password
+    });
+  
+    findUser.save();
+  }
+
+  return { data: "User updated" };
+};
+
+
+export const deleteUser = async(userId) =>{
+  const findUser = await Users.findOne({
+    where: {
+      id: userId
+    }
+  });
+
+  if(!findUser){
+    return {data: "No user found"};
+  };
+
+  await findUser.update({
+    deleted: true
+  });
+
+  return {data: "User deleted"};
+};
+
+export const getAllUsers = async () => {
+  const data = await Users.findAll()
+  const total = data.length
+  let activos = 0
+  let desactivados = 0
+
+  for(let value of data){
+    if(value.deleted === false) activos ++;
+    else { desactivados ++ }
+  }
+
+  return {
+    total,
+    activos,
+    desactivados,
+    data
+  }
+}
