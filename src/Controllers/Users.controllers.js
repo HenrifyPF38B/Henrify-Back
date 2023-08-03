@@ -64,8 +64,17 @@ export const googleAuth = async(newUser) =>{
 
   if(findUser){
     return {data: findUser};
-  }else{
-    const createUser = await Users.create(newUser);
+  }else if(!findUser){
+    const createUser = await Users.create({
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      avatar: newUser.avatar,
+      email: newUser.email,
+      password: newUser.password,
+      member: false,
+      googleUser: true,
+      userName: newUser.userName
+    });
 
     // return {data: "User created"};
 
@@ -221,3 +230,46 @@ export const deleteUser = async(userId) =>{
 
   return {data: "User deleted"};
 };
+
+export const makeMember = async(data) =>{
+
+  const { userId, expire } = data;
+
+  const findUser = await Users.findOne({
+    where:{
+      id: userId
+    }
+  });
+
+  if(!findUser){
+    return {data:"User not found"};
+  }
+
+  findUser.update({
+    member: true,
+    memberExpire: expire
+  });
+
+  findUser.save();
+
+  return {data: "User now is member"};
+};
+
+export const getAllUsers = async () => {
+  const data = await Users.findAll()
+  const total = data.length
+  let activos = 0
+  let desactivados = 0
+
+  for(let value of data){
+    if(value.deleted === false) activos ++;
+    else { desactivados ++ }
+  }
+
+  return {
+    total,
+    activos,
+    desactivados,
+    data
+  }
+}

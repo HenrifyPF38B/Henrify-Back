@@ -9,6 +9,7 @@ import { createUserHandler } from "../Handlers/Users/createUserHandler.js";
 import { favsUserHandler } from "../Handlers/Users/favsUserHandler.js";
 import { putUserCartHandler } from "../Handlers/Users/putUsersCatHandler.js";
 import { googleAuthHandler } from "../Handlers/Users/googleAuthHandler.js";
+import { makeMemberHandler } from "../Handlers/Users/makeMemberHandler.js";
 
 export const usersRouter = Router()
 
@@ -20,7 +21,9 @@ usersRouter.put("/cart", putUserCartHandler);
 usersRouter.get('/:id',getUsersByIdHandler)
 usersRouter.put('/', putUsersHandler);
 usersRouter.delete('/:id', deleteUsersHandler);
+usersRouter.put('/member', makeMemberHandler);
+usersRouter.get('/', getUsersHandler)
 
-/* usersRouter.get('/', getUsersHandler)
+/* 
 usersRouter.post('/', postUsersHandler)
 usersRouter.put('/:id', putUsersHandler)*/
