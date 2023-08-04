@@ -2,6 +2,9 @@ import Albums from '../Models/Albums.js';
 import Playlists from '../Models/Playlists.js';
 import Users  from '../Models/Users.js'
 import { Op } from "sequelize";
+import { sendMail } from '../Util/emailCtrl.js';
+import { generateToken } from '../Util/jwtEncode.js';
+import jwt from "jsonwebtoken";
 
 
 export const userLogin = async(user) =>{
@@ -62,7 +65,9 @@ export const googleAuth = async(newUser) =>{
     }
   });
 
-  if(findUser){
+  if(findUser && !findUser.googleUser){
+    return {data: "We already have an account registered with that email"}
+  }else if(findUser && findUser.googleUser){
     return {data: findUser};
   }else if(!findUser){
     const createUser = await Users.create({
@@ -273,3 +278,35 @@ export const getAllUsers = async () => {
     data
   }
 }
+
+
+export const forgotPassword = async(email) =>{
+  
+  const findUser = await Users.findOne({
+    where:{
+      email: email
+    }
+  });
+
+  if(!findUser){
+    return {data: "No user found"};
+  };
+
+  const encriptedUser = generateToken(findUser.id);
+
+  const resetURL = `
+    <h3>Soul Music Support</h3>
+    <p>Please follow this link to reset your password.</p> 
+    <a href="http://localhost:3000/reset-password/${encriptedUser}">Click Here<a>`
+    
+    let data = {
+      to: findUser.email,
+      text: `Hey ${findUser.userName}`,
+      subject: `Hey ${findUser.userName}! Forgot your Password?`,
+      htm: resetURL
+    };
+
+    sendMail(data);
+
+    return {data:"ForgotP sent"};
+};
