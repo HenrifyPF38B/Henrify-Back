@@ -31,21 +31,13 @@ export const getSong = async () => {
    
   });
 
-  let totalPreviews = 0
-  let totalExplicit = 0
-  for(let value of songs){
-    if(value.explicit === true) totalExplicit ++;
-  };
-
   if (songs.length){
     return { 
-      total: songs.length,
-      totalExplicit,
       data: songs 
     };
   } 
 
-
+}
 //***FUNCION: Get Songs by name
 export const getSongByName = async (name) => {
   const songs = await Song.findAll({
@@ -122,3 +114,19 @@ export const putSongById = async (
   return "No se guardó los cambios";
 };
 
+export const getAllSongs = async () => {
+  const data = await Song.findAll();
+  let totalExplicit = 0
+  let desactivados = 0
+
+  for(let value of data){
+    if(value.explicit === true) totalExplicit ++;
+    if(value.deleted === true) desactivados ++;
+  };
+  return {
+    total: data.length,
+    totalExplicit,
+    desactivados,
+    data
+  }
+}

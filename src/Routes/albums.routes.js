@@ -5,6 +5,7 @@ import {
   postAlbumsHandler,
   deleteAlbumsHandler,
   putAlbumsHandler,
+  getAllAlbumsHandler
 } from "../Handlers/Albums/albumsHandler.js";
 import { validateAlbum } from "../Handlers/Albums/validate.js";
 import { albumsToDb } from "../Util/initFetch.js";
@@ -12,6 +13,7 @@ import { albumsToDb } from "../Util/initFetch.js";
 export const albumsRouter = Router();
 
 albumsRouter.get('/', getAlbumsHandler)
+albumsRouter.get('/all', getAllAlbumsHandler)
 albumsRouter.get('/:id',getAlbumsByIdHandler)
 albumsRouter.post('/', postAlbumsHandler)
 albumsRouter.put('/:id', putAlbumsHandler)

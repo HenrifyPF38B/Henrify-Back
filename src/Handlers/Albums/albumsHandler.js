@@ -6,6 +6,7 @@ import {
   deleteAlbumById,
   createAlbum,
   modifyAlbum,
+  getAlbums,
 } from "../../Controllers/Albums.controllers.js";
 // T
 
@@ -13,11 +14,20 @@ const getAlbumsHandler = async (req, res, next) => {
   const { name } = req.query;
 
   try {
-    const results = name ? await searchAlbums(name) : await getAllAlbums();
+    const results = name ? await searchAlbums(name) : await getAlbums();
     if (!results.data) {
        res.status(200).json({error: results});
     }
     res.status(200).json(results);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllAlbumsHandler = async (req, res, next) => {
+  try {
+    const data = await getAllAlbums();
+    return res.status(200).json(data);
   } catch (error) {
     next(error);
   }
@@ -97,6 +107,7 @@ const putAlbumsHandler = async (req, res, next) => {
 export {
   getAlbumsByIdHandler,
   getAlbumsHandler,
+  getAllAlbumsHandler,
   deleteAlbumsHandler,
   postAlbumsHandler,
   putAlbumsHandler,
