@@ -19,6 +19,10 @@ const Playlists = sequelize.define('Playlists', {
       type: DataTypes.STRING,
       allowNull: false
     },
+    belongsTo: {
+      type: DataTypes.STRING,
+      defaultValue: "Soul Life"
+    },
     tracks: {
       type: DataTypes.TEXT, 
       get: function() {

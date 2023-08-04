@@ -8,6 +8,8 @@ import { createUserHandler } from "../Handlers/Users/createUserHandler.js";
 import { favsUserHandler } from "../Handlers/Users/favsUserHandler.js";
 import { putUserCartHandler } from "../Handlers/Users/putUsersCatHandler.js";
 import { googleAuthHandler } from "../Handlers/Users/googleAuthHandler.js";
+import { makeMemberHandler } from "../Handlers/Users/makeMemberHandler.js";
+import { forgotPHandler } from "../Handlers/Users/forgotPHandler.js";
 
 export const usersRouter = Router()
 
@@ -19,6 +21,10 @@ usersRouter.put("/cart", putUserCartHandler);
 usersRouter.get('/:id',getUsersByIdHandler)
 usersRouter.put('/', putUsersHandler);
 usersRouter.delete('/:id', deleteUsersHandler);
+usersRouter.put('/member', makeMemberHandler);
+usersRouter.get('/', getUsersHandler)
+usersRouter.put('/forgot-password', forgotPHandler)
+
 
 //info para admin 
 usersRouter.get('/', getUsersHandler)

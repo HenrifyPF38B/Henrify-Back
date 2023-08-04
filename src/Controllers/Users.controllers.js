@@ -2,6 +2,9 @@ import Albums from '../Models/Albums.js';
 import Playlists from '../Models/Playlists.js';
 import Users  from '../Models/Users.js'
 import { Op } from "sequelize";
+import { sendMail } from '../Util/emailCtrl.js';
+import { generateToken } from '../Util/jwtEncode.js';
+import jwt from "jsonwebtoken";
 
 
 export const userLogin = async(user) =>{
@@ -62,10 +65,21 @@ export const googleAuth = async(newUser) =>{
     }
   });
 
-  if(findUser){
+  if(findUser && !findUser.googleUser){
+    return {data: "We already have an account registered with that email"}
+  }else if(findUser && findUser.googleUser){
     return {data: findUser};
-  }else{
-    const createUser = await Users.create(newUser);
+  }else if(!findUser){
+    const createUser = await Users.create({
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      avatar: newUser.avatar,
+      email: newUser.email,
+      password: newUser.password,
+      member: false,
+      googleUser: true,
+      userName: newUser.userName
+    });
 
     // return {data: "User created"};
 
@@ -217,11 +231,33 @@ export const deleteUser = async(userId) =>{
     return {data: "No user found"};
   };
 
-  await findUser.update({
-    deleted: true
-  });
+  findUser.destroy();
 
   return {data: "User deleted"};
+};
+
+export const makeMember = async(data) =>{
+
+  const { userId, expire } = data;
+
+  const findUser = await Users.findOne({
+    where:{
+      id: userId
+    }
+  });
+
+  if(!findUser){
+    return {data:"User not found"};
+  }
+
+  findUser.update({
+    member: true,
+    memberExpire: expire
+  });
+
+  findUser.save();
+
+  return {data: "User now is member"};
 };
 
 export const getAllUsers = async () => {
@@ -242,3 +278,35 @@ export const getAllUsers = async () => {
     data
   }
 }
+
+
+export const forgotPassword = async(email) =>{
+  
+  const findUser = await Users.findOne({
+    where:{
+      email: email
+    }
+  });
+
+  if(!findUser){
+    return {data: "No user found"};
+  };
+
+  const encriptedUser = generateToken(findUser.id);
+
+  const resetURL = `
+    <h3>Soul Music Support</h3>
+    <p>Please follow this link to reset your password.</p> 
+    <a href="http://localhost:3000/reset-password/${encriptedUser}">Click Here<a>`
+    
+    let data = {
+      to: findUser.email,
+      text: `Hey ${findUser.userName}`,
+      subject: `Hey ${findUser.userName}! Forgot your Password?`,
+      htm: resetURL
+    };
+
+    sendMail(data);
+
+    return {data:"ForgotP sent"};
+};

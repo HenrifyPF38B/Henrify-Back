@@ -46,10 +46,12 @@ const Albums = sequelize.define(
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 50
     },
     stock: {
       type: DataTypes.STRING,
       allowNull: true,
+      defaultValue: 100
     },
     deleted: {
       type: DataTypes.BOOLEAN,
