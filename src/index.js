@@ -15,11 +15,12 @@ import {
 } from './Models/relations.js'
 import { config } from 'dotenv'
 
-const { PORT } = config().parsed
+config()
+
+const port = process.env.PORT || 3001
 
 
 const app = express();
-const port = PORT || 3001;
 
 //midelwares
 app.use(express.json());
