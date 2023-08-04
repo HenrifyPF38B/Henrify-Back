@@ -13,8 +13,13 @@ import {
   Users,
   Products
 } from './Models/relations.js'
+import { config } from 'dotenv'
 
-const app = express()
+const { PORT } = config().parsed
+
+
+const app = express();
+const port = PORT || 3001;
 
 //midelwares
 app.use(express.json());
@@ -25,8 +30,8 @@ app.use('/api', router)
 
 sequelize.sync({force: false})
   .then(() => {
-    app.listen(3001, () => {
-      console.log("server on port 3001")
+    app.listen(port, () => {
+      console.log("Server running on Railway")
     })
   })
   .catch((error) => {
