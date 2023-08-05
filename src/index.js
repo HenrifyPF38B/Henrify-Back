@@ -45,3 +45,4 @@ sequelize.sync({force: false})
     console.error(err);
     res.status(status).send(message);
   });
+

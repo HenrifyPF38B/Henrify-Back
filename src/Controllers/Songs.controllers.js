@@ -1,4 +1,5 @@
-
+import Albums from "../Models/Albums.js";
+import Genres from "../Models/Genres.js";
 import Song from "../Models/Songs.js";
 import { Op } from "sequelize";
 
@@ -35,25 +36,8 @@ export const getSong = async () => {
       data: songs 
     };
   } 
-
-}
-
-export const getAllSongs = async () => {
-  const data = await Song.findAll();
-  let totalExplicit = 0
-  let desactivados = 0
-
-  for(let value of data){
-    if(value.explicit === true) totalExplicit ++;
-    if(value.deleted === true) desactivados ++;
-  };
-  return {
-    total: data.length,
-    totalExplicit,
-    desactivados,
-    data
-  }
-}
+  return "No hay Songs";
+};
 
 //***FUNCION: Get Songs by name
 export const getSongByName = async (name) => {
@@ -130,3 +114,20 @@ export const putSongById = async (
   if (song) return { data: song };
   return "No se guardó los cambios";
 };
+
+export const getAllSongs = async () => {
+  const data = await Song.findAll();
+  let totalExplicit = 0
+  let desactivados = 0
+
+  for(let value of data){
+    if(value.explicit === true) totalExplicit ++;
+    if(value.deleted === true) desactivados ++;
+  };
+  return {
+    total: data.length,
+    totalExplicit,
+    desactivados,
+    data
+  }
+}

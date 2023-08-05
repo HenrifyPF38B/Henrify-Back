@@ -9,6 +9,7 @@ import Genres  from './Genres.js'
 import Products  from './Products.js'
 import Orders from './Orders.js'
 
+
 //RELACIONES DE USUARIO
 Users.hasMany(Reviews)
 Users.hasOne(Memberships)
@@ -21,8 +22,8 @@ Orders.belongsTo(Users)
 
 //RELACIONES DE SHOPPINGCARTs
 ShoppingCarts.belongsTo(Users)
-ShoppingCarts.belongsToMany(Albums, { through: Products } )
-ShoppingCarts.belongsToMany(Memberships, { through: Products } )
+ShoppingCarts.belongsToMany(Albums, { through: Products })
+ShoppingCarts.belongsToMany(Memberships, { through: Products })
 
 //RELACIONES DE REVIEWS
 Reviews.belongsTo(Users)
@@ -54,5 +55,5 @@ export {
   ShoppingCarts,
   Songs,
   Users,
-  Products
+  Products,
 }

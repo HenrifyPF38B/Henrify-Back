@@ -1,3 +1,4 @@
+
 import {
   getAllAlbums,
   getAlbums,
@@ -6,6 +7,7 @@ import {
   deleteAlbumById,
   createAlbum,
   modifyAlbum,
+  getAlbums,
 } from "../../Controllers/Albums.controllers.js";
 // T
 
@@ -106,6 +108,7 @@ const putAlbumsHandler = async (req, res, next) => {
 export {
   getAlbumsByIdHandler,
   getAlbumsHandler,
+  getAllAlbumsHandler,
   deleteAlbumsHandler,
   postAlbumsHandler,
   putAlbumsHandler,

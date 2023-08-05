@@ -10,28 +10,7 @@ export const getAlbums = async () => {
      return "No se encontraron Albums";
   }
  
-  return { data: albums };
-}
-
-export const getAllAlbums = async () => {
-  const data = await Albums.findAll()
-  let desactivados = 0
-  let totalStock = 0
-  if (!data.length) {
-     return "No se encontraron Albums";
-  }
-
-  for(let value of data){
-    if(value.deleted === true) desactivados ++;
-    if(value.stock > 0) totalStock += Number(value.stock);
-  }
- 
-  return { 
-    totalStock,
-    desactivados,
-    total: data.length,
-    data
-  };
+  return { total: albums.length, data: albums };
 }
 
 export const searchAlbums = async (name) => {
@@ -107,4 +86,25 @@ export const modifyAlbum = async (
   await album.save()
 
   return { data: album }
+}
+
+export const getAllAlbums = async () => {
+  const data = await Albums.findAll()
+  let desactivados = 0
+  let totalStock = 0
+  if (!data.length) {
+     return "No se encontraron Albums";
+  }
+
+  for(let value of data){
+    if(value.deleted === true) desactivados ++;
+    if(value.stock > 0) totalStock += Number(value.stock);
+  }
+ 
+  return { 
+    totalStock,
+    desactivados,
+    total: data.length,
+    data
+  };
 }

@@ -8,5 +8,5 @@ export const sequelize = new Sequelize(
   DB_DEPLOY,
   {
   logging: false,
-  native: false
-});
+  native: false,
+})
