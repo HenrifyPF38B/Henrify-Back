@@ -1,6 +1,7 @@
 
 import {
   getAllAlbums,
+  getAlbums,
   searchAlbums,
   getAlbumById,
   deleteAlbumById,
@@ -111,4 +112,5 @@ export {
   deleteAlbumsHandler,
   postAlbumsHandler,
   putAlbumsHandler,
+  getAllAlbumsHandler
 };

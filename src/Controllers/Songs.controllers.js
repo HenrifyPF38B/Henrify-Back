@@ -36,8 +36,9 @@ export const getSong = async () => {
       data: songs 
     };
   } 
+  return "No hay Songs";
+};
 
-}
 //***FUNCION: Get Songs by name
 export const getSongByName = async (name) => {
   const songs = await Song.findAll({

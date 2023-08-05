@@ -97,34 +97,36 @@ export const userFavs = async(data) =>{
   });
 
   
-  let userFavorites = findUser.dataValues.favorites || [];
+  // let userFavorites = findUser.dataValues.favorites || [];
 
-  if(userFavorites?.length === 0){
-    userFavorites?.push(productId);
+  // if(userFavorites.length === 0){
+  //   userFavorites.push(productId);
+  // }else{
+  //   let filter = userFavorites.filter(el => el !== productId);
+
+  //   if(filter.length === userFavorites.length){
+  //     userFavorites.push(productId);
+  //   }else{
+  //     userFavorites = filter;
+  //   }
+  // }
+
+  // console.log(userFavorites);
+
+  if(findUser.dataValues.favorites.includes(productId)){
+    await findUser.update({
+      favorites: findUser.dataValues.favorites.filter(el => el !== productId)
+    });
   }else{
-    let filter = userFavorites?.filter(el => el !== productId);
-
-    if(filter?.length === userFavorites?.length){
-      userFavorites?.push(productId);
-    }else{
-      userFavorites = filter;
-    }
+    await findUser.update({
+      favorites: [...findUser.dataValues.favorites, productId]
+    });
   }
 
-  console.log(userFavorites);
 
-  const updateUser = await Users.update(
-    {
-    favorites: userFavorites
-    },
-    {
-      where:{
-        id: userId
-      }
-    }
-  );
+  await findUser.save();
 
-  return { data: updateUser };
+  return { data: findUser };
 
 };
 

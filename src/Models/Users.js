@@ -24,6 +24,7 @@ const Users = sequelize.define(
     },
     favorites: {
       type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
       defaultValue: [],
     },
     lastName: {
@@ -60,6 +61,7 @@ const Users = sequelize.define(
     },
     member: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: false
     },
     memberExpire:{
