@@ -1,12 +1,12 @@
 
 import {
   getAllAlbums,
+  getAlbums,
   searchAlbums,
   getAlbumById,
   deleteAlbumById,
   createAlbum,
   modifyAlbum,
-  getAlbums,
 } from "../../Controllers/Albums.controllers.js";
 // T
 

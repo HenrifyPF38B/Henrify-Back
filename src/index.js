@@ -15,11 +15,12 @@ import {
 } from './Models/relations.js'
 import { config } from 'dotenv'
 
-const { PORT } = config().parsed
+config()
 
+const port = process.env.PORT || 3001
+// Esto hay que importalo asi para poder deployarlo por Railway, si no no toma las variables
 
 const app = express();
-const port = PORT || 3001;
 
 //midelwares
 app.use(express.json());

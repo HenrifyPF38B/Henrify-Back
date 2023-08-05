@@ -31,13 +31,12 @@ export const getSong = async () => {
    
   });
 
-  if (songs.length){
-    return { 
-      data: songs 
-    };
+  if(!songs.length){
+    return "No hay songs";
   } 
+  return {data: songs};
+};
 
-}
 //***FUNCION: Get Songs by name
 export const getSongByName = async (name) => {
   const songs = await Song.findAll({
