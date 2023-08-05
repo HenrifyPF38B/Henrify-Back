@@ -1,5 +1,6 @@
 import {
   getAllAlbums,
+  getAlbums,
   searchAlbums,
   getAlbumById,
   deleteAlbumById,
@@ -12,11 +13,20 @@ const getAlbumsHandler = async (req, res, next) => {
   const { name } = req.query;
 
   try {
-    const results = name ? await searchAlbums(name) : await getAllAlbums();
+    const results = name ? await searchAlbums(name) : await getAlbums();
     if (!results.data) {
        res.status(200).json({error: results});
     }
     res.status(200).json(results);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllAlbumsHandler = async (req, res, next) => {
+  try {
+    const data = await getAllAlbums();
+    return res.status(200).json(data);
   } catch (error) {
     next(error);
   }
@@ -99,4 +109,5 @@ export {
   deleteAlbumsHandler,
   postAlbumsHandler,
   putAlbumsHandler,
+  getAllAlbumsHandler
 };

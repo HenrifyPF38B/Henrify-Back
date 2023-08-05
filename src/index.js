@@ -18,7 +18,7 @@ import { config } from 'dotenv'
 config()
 
 const port = process.env.PORT || 3001
-
+// Esto hay que importalo asi para poder deployarlo por Railway, si no no toma las variables
 
 const app = express();
 

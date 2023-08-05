@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  getAllAlbumsHandler,
   getAlbumsHandler,
   getAlbumsByIdHandler,
   postAlbumsHandler,
@@ -12,6 +13,7 @@ import { albumsToDb } from "../Util/initFetch.js";
 export const albumsRouter = Router();
 
 albumsRouter.get("/", getAlbumsHandler);
+albumsRouter.get('/all', getAllAlbumsHandler)
 albumsRouter.get("/:id", getAlbumsByIdHandler);
 albumsRouter.post("/", postAlbumsHandler);
 albumsRouter.put("/:id", putAlbumsHandler);

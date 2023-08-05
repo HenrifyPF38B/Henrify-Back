@@ -2,7 +2,7 @@ import Albums from '../Models/Albums.js'
 import { Sequelize } from 'sequelize'
 
 
-export const getAllAlbums = async () => {
+export const getAlbums = async () => {
   const albums = await Albums.findAll({
     where: { deleted: false },
   })
@@ -10,7 +10,28 @@ export const getAllAlbums = async () => {
      return "No se encontraron Albums";
   }
  
-  return { total: albums.length, data: albums };
+  return { data: albums };
+}
+
+export const getAllAlbums = async () => {
+  const data = await Albums.findAll()
+  let desactivados = 0
+  let totalStock = 0
+  if (!data.length) {
+     return "No se encontraron Albums";
+  }
+
+  for(let value of data){
+    if(value.deleted === true) desactivados ++;
+    if(value.stock > 0) totalStock += Number(value.stock);
+  }
+ 
+  return { 
+    totalStock,
+    desactivados,
+    total: data.length,
+    data
+  };
 }
 
 export const searchAlbums = async (name) => {

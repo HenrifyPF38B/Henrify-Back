@@ -1,5 +1,8 @@
 import { config } from 'dotenv'
-const { MAIL_ID, MAIL_PASSWORD } = config().parsed
+config()
+
+const MAIL_ID = process.env.MAIL_ID;
+const MAIL_PASSWORD = process.env.MAIL_PASSWORD;
 
 
 import nodemailer from "nodemailer";
