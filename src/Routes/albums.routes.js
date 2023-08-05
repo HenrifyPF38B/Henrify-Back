@@ -6,7 +6,6 @@ import {
   postAlbumsHandler,
   deleteAlbumsHandler,
   putAlbumsHandler,
-  getAllAlbumsHandler
 } from "../Handlers/Albums/albumsHandler.js";
 import { validateAlbum } from "../Handlers/Albums/validate.js";
 import { albumsToDb } from "../Util/initFetch.js";

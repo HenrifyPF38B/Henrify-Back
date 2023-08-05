@@ -7,7 +7,6 @@ import {
   deleteAlbumById,
   createAlbum,
   modifyAlbum,
-  getAlbums,
 } from "../../Controllers/Albums.controllers.js";
 // T
 
@@ -112,5 +111,4 @@ export {
   deleteAlbumsHandler,
   postAlbumsHandler,
   putAlbumsHandler,
-  getAllAlbumsHandler
 };

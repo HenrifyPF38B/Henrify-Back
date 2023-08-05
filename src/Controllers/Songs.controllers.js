@@ -31,12 +31,10 @@ export const getSong = async () => {
    
   });
 
-  if (songs.length){
-    return { 
-      data: songs 
-    };
+  if(!songs.length){
+    return "No hay songs";
   } 
-  return "No hay Songs";
+  return {data: songs};
 };
 
 //***FUNCION: Get Songs by name
