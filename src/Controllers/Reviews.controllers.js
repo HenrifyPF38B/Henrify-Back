@@ -10,14 +10,13 @@ export const getReviews = async () => {
   return data
 }
 
-export const postReviews = async (comment, rating, userId, albumId) => {
+export const postReviews = async (comment, rating, userId) => {
   if( 
-    typeof(comment) !== 'string' || comment.length < 1 ||
+    //typeof(comment) !== 'string' || comment.length < 1 ||
     typeof(rating) !== 'number' || rating.length < 1 ||
-    typeof(userId) !== 'string' || comment.length < 1 ||
-    typeof(albumId) !== 'number' || albumId.length < 1
-    ) throw Error('Campos obligatorios sin completar')
-  const data = await Reviews.create({ comment, rating, userId, albumId })
+    typeof(userId) !== 'string' || comment.length < 1 
+    ) return('Campos obligatorios sin completar')
+  const data = await Reviews.create({ comment, rating, userId })
   
   return data
 }

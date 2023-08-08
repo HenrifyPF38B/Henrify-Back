@@ -27,7 +27,7 @@ ShoppingCarts.belongsToMany(Memberships, { through: Products })
 
 //RELACIONES DE REVIEWS
 Reviews.belongsTo(Users)
-Reviews.belongsTo(Albums)
+//Reviews.belongsTo(Albums)
 
 //RELACIONES DE MEMBERSHIPsS
 Memberships.hasMany(Users)
