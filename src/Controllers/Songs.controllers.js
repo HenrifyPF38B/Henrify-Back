@@ -56,23 +56,23 @@ export const getSongByName = async (name) => {
 //***FUNCION: POST - Crea un Song
 export const postSong = async (name, artists, audioFull, image, type, songId, popularity, explicit) => {
 
-  //CREA una nueva Song. Si existe el nombre no lo crea
-  const newSong = await Song.findOrCreate({
-    where: { name: `${name}` },
-    defaults: {
-      popularity: `${popularity}`,
-      explicit: `${explicit}`,
-      type: `${type}`,
-      songId: `${songId}`,
-      artists: `${artists}`,
-      audioFull: `${audioFull}`,
-      audioPreview: `${audioPreview}`,
-      image: `${image}`,
-    },
-  });
-  //VERIFICAR si se creó un nuevo registro
-  const createdNewSong = newSong[1];
-  if (createdNewSong) return { data: newSong };
+  // //CREA una nueva Song. Si existe el nombre no lo crea
+  // const newSong = await Song.findOrCreate({
+  //   where: { name: `${name}` },
+  //   defaults: {
+  //     popularity: `${popularity}`,
+  //     explicit: `${explicit}`,
+  //     type: `${type}`,
+  //     songId: `${songId}`,
+  //     artists: `${artists}`,
+  //     audioFull: `${audioFull}`,
+  //     audioPreview: `${audioPreview}`,
+  //     image: `${image}`,
+  //   },
+  // });
+  // //VERIFICAR si se creó un nuevo registro
+  // const createdNewSong = newSong[1];
+  // if (createdNewSong) return { data: newSong };
   return "Se encontró un registro existente con el mismo nombre.";
 };
 
