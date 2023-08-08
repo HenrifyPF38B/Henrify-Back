@@ -55,7 +55,7 @@ export const getSongByName = async (name) => {
 
 //***FUNCION: POST - Crea un Song
 export const postSong = async (name, artists, audioFull, image, type, songId, popularity, explicit) => {
-
+  console.log(name, artists, audioFull, image, type, songId, popularity, explicit)
   //CREA una nueva Song. Si existe el nombre no lo crea
   const newSong = await Song.findOrCreate({
     where: { name: `${name}` },
