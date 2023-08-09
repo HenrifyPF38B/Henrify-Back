@@ -9,7 +9,7 @@ const Reviews = sequelize.define('Reviews', {
     },
     comment:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     rating:{
       type: DataTypes.INTEGER,
