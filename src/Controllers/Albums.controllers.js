@@ -47,7 +47,8 @@ export const deleteAlbumById = async (id) => {
     return null
   }
 
-  album.deleted = true
+  album.deleted = !album.deleted
+  
   await album.save()
 
   return { data: album };

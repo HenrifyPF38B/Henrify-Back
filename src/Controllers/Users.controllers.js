@@ -233,7 +233,7 @@ export const deleteUser = async(userId) =>{
     return {data: "No user found"};
   };
 
-  findUser.deleted = true
+  findUser.deleted = !findUser.deleted
 
   findUser.save()
 

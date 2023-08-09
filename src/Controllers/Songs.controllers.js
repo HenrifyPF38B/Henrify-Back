@@ -9,7 +9,9 @@ export const deleteSongById = async (id) => {
   if (!song) {
     return `No se encontraron canciones con el ID ${id}`;
   }
-  song.deleted = true;
+  
+  song.deleted = !song.deleted;
+
   await song.save();
 
   return { data: song };
