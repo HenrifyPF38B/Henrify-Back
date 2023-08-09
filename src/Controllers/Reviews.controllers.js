@@ -10,14 +10,14 @@ export const getReviews = async () => {
   return data
 }
 
-export const postReviews = async (comment, rating, userId) => {
-  if( 
+export const postReviews = async (comment, rating, UserId) => {
+ /*  if( 
     //typeof(comment) !== 'string' || comment.length < 1 ||
-    typeof(rating) !== 'number' || rating.length < 1 ||
-    typeof(userId) !== 'string' || comment.length < 1 
-    ) return('Campos obligatorios sin completar')
-  const data = await Reviews.create({ comment, rating, userId })
-  
+    //typeof(rating) !== 'number' || rating.length < 1 ||
+   // typeof(userId) !== 'string' || comment.length < 1 
+    ) return('Campos obligatorios sin completar') */
+  const data = await Reviews.create({ comment, rating, UserId })
+  if(!data) return "No se guardaron los datos"
   return data
 }
 

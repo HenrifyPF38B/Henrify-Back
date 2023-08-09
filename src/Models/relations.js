@@ -38,7 +38,7 @@ Memberships.hasMany(Users)
 Playlists.belongsTo(Users)
 
 //RELACIONES DE ALBUM
-Albums.hasMany(Reviews)
+//Albums.hasMany(Reviews)
 Albums.belongsToMany(ShoppingCarts, { through: Products })
 Albums.belongsToMany(Memberships, { through: Playlists })
 
