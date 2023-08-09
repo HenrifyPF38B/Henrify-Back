@@ -1,14 +1,22 @@
 import Reviews from '../Models/Reviews.js'
 import Albums from '../Models/Albums.js'
+import Users from '../Models/Users.js';
 
 export const getReviews = async () => {
   const data = await Reviews.findAll({
     where: {
-      deleted: false
-    }
-  })
-  return data
-}
+      deleted: false,
+    },
+    include: [
+      {
+        model: Users,
+        // as: "user",
+        attributes: ["firstName", "lastName", "avatar"],
+      },
+    ],
+  });
+  return data;
+};
 
 export const postReviews = async (comment, rating, UserId) => {
  /*  if( 
